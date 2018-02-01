@@ -1,29 +1,37 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var habbajet_1 = require("./habbajet");
+var checkbox_1 = require("./checkbox");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.stateIndex = 0;
-        this.animationIndex = 0;
-        this.habbajetImage = "~/images/Habbajet" + this.stateIndex + "_" + this.animationIndex + ".png";
+        this.habbajet = new habbajet_1.HabbajetBinding();
+        this.currentImage = this.habbajet.getImage();
+        this.checkboxes = [
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding(),
+            new checkbox_1.CheckboxBinding()
+        ];
     }
-    AppComponent.prototype.evolveState = function () {
-        this.stateIndex < 5 ? this.stateIndex++ : this.stateIndex = 0;
-        this.habbajetImage = "~/images/Habbajet" + this.stateIndex + "_" + this.animationIndex + ".png";
+    AppComponent.prototype.onCheckboxTap = function (args) {
+        this.checkboxes[args.index].cycleStates();
+    };
+    AppComponent.prototype.onEvolveTap = function () {
+        this.habbajet.evolveState();
+        this.currentImage = this.habbajet.getImage();
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",
-            template: "\n    <ActionBar title=\"Habbajet\" class=\"action-bar\"></ActionBar>\n    <!-- Your UI components go here -->\n\n    <StackLayout>\n      <GridView rows=\"auto\" columns=\"100, 100\">\n        <!--<Label row=\"0\" col=\"0\" text=\"habbajet\" tap=\"onTap\"> </Label>\n         <Label row=\"0\" col=\"1\" text=\"inferior beings\" tap=\"onOtherTap\"> </Label> -->\n      </GridView>\n      <Image [src]=\"habbajetImage\"></Image>\n      <Button text=\"EVOLVE\" (tap)=\"evolveState()\"></Button>\n    </StackLayout>\n  "
+            template: "<ActionBar title=\"Habbajet\" class=\"action-bar\"></ActionBar>\n\n  <StackLayout>\n      <Image [src]=\"currentImage\"></Image>\n      <Button text=\"EVOLVE\" (tap)=\"onEvolveTap()\"></Button>\n      <ListView [items]=\"checkboxes\" (itemTap)=\"onCheckboxTap($event)\">\n      <ng-template let-item=\"item\">\n          <StackLayout>\n              <Image [src]=\"image\"></Image>\n          </StackLayout>\n      </ng-template>\n      </ListView>\n  </StackLayout>"
+            // templateUrl: "./habbajet.xml",
         })
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-// exports.onTap = function() {
-//   console.log('Habbajet tapped!');
-// };
-// exports.onOtherTap = function() {
-//   console.log('Inferior being tapped!');
-// };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxzQ0FBb0Q7QUFrQnBEO0lBaEJBO1FBaUJFLGVBQVUsR0FBRyxDQUFDLENBQUM7UUFDZixtQkFBYyxHQUFHLENBQUMsQ0FBQztRQUNuQixrQkFBYSxHQUFHLG1CQUFtQixHQUFHLElBQUksQ0FBQyxVQUFVLEdBQUcsR0FBRyxHQUFHLElBQUksQ0FBQyxjQUFjLEdBQUcsTUFBTSxDQUFDO0lBUzdGLENBQUM7SUFQQyxrQ0FBVyxHQUFYO1FBQ0UsSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFVLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUM7UUFDOUQsSUFBSSxDQUFDLGFBQWEsR0FBRyxtQkFBbUIsR0FBRyxJQUFJLENBQUMsVUFBVSxHQUFHLEdBQUcsR0FBRyxJQUFJLENBQUMsY0FBYyxHQUFHLE1BQU0sQ0FBQztJQUNsRyxDQUFDO0lBUlUsWUFBWTtRQWhCeEIsZ0JBQVMsQ0FBQztZQUNULFFBQVEsRUFBRSxRQUFRO1lBQ2xCLFFBQVEsRUFBRSxzZ0JBWVQ7U0FDRixDQUFDO09BQ1csWUFBWSxDQVl4QjtJQUFELG1CQUFDO0NBQUEsQUFaRCxJQVlDO0FBWlksb0NBQVk7QUFjekIsK0JBQStCO0FBQy9CLHFDQUFxQztBQUNyQyxLQUFLO0FBRUwsb0NBQW9DO0FBQ3BDLDJDQUEyQztBQUMzQyxLQUFLIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBOZ01vZHVsZSB9IGZyb20gXCJAYW5ndWxhci9jb3JlXCI7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogXCJteS1hcHBcIixcbiAgdGVtcGxhdGU6IGBcbiAgICA8QWN0aW9uQmFyIHRpdGxlPVwiSGFiYmFqZXRcIiBjbGFzcz1cImFjdGlvbi1iYXJcIj48L0FjdGlvbkJhcj5cbiAgICA8IS0tIFlvdXIgVUkgY29tcG9uZW50cyBnbyBoZXJlIC0tPlxuXG4gICAgPFN0YWNrTGF5b3V0PlxuICAgICAgPEdyaWRWaWV3IHJvd3M9XCJhdXRvXCIgY29sdW1ucz1cIjEwMCwgMTAwXCI+XG4gICAgICAgIDwhLS08TGFiZWwgcm93PVwiMFwiIGNvbD1cIjBcIiB0ZXh0PVwiaGFiYmFqZXRcIiB0YXA9XCJvblRhcFwiPiA8L0xhYmVsPlxuICAgICAgICAgPExhYmVsIHJvdz1cIjBcIiBjb2w9XCIxXCIgdGV4dD1cImluZmVyaW9yIGJlaW5nc1wiIHRhcD1cIm9uT3RoZXJUYXBcIj4gPC9MYWJlbD4gLS0+XG4gICAgICA8L0dyaWRWaWV3PlxuICAgICAgPEltYWdlIFtzcmNdPVwiaGFiYmFqZXRJbWFnZVwiPjwvSW1hZ2U+XG4gICAgICA8QnV0dG9uIHRleHQ9XCJFVk9MVkVcIiAodGFwKT1cImV2b2x2ZVN0YXRlKClcIj48L0J1dHRvbj5cbiAgICA8L1N0YWNrTGF5b3V0PlxuICBgXG59KVxuZXhwb3J0IGNsYXNzIEFwcENvbXBvbmVudCB7XG4gIHN0YXRlSW5kZXggPSAwO1xuICBhbmltYXRpb25JbmRleCA9IDA7XG4gIGhhYmJhamV0SW1hZ2UgPSBcIn4vaW1hZ2VzL0hhYmJhamV0XCIgKyB0aGlzLnN0YXRlSW5kZXggKyBcIl9cIiArIHRoaXMuYW5pbWF0aW9uSW5kZXggKyBcIi5wbmdcIjtcblxuICBldm9sdmVTdGF0ZSgpIHtcbiAgICB0aGlzLnN0YXRlSW5kZXggPCA1ID8gdGhpcy5zdGF0ZUluZGV4KysgOiB0aGlzLnN0YXRlSW5kZXggPSAwO1xuICAgIHRoaXMuaGFiYmFqZXRJbWFnZSA9IFwifi9pbWFnZXMvSGFiYmFqZXRcIiArIHRoaXMuc3RhdGVJbmRleCArIFwiX1wiICsgdGhpcy5hbmltYXRpb25JbmRleCArIFwiLnBuZ1wiO1xuICB9XG5cblxuICBcbn1cblxuLy8gZXhwb3J0cy5vblRhcCA9IGZ1bmN0aW9uKCkge1xuLy8gICBjb25zb2xlLmxvZygnSGFiYmFqZXQgdGFwcGVkIScpO1xuLy8gfTtcblxuLy8gZXhwb3J0cy5vbk90aGVyVGFwID0gZnVuY3Rpb24oKSB7XG4vLyAgIGNvbnNvbGUubG9nKCdJbmZlcmlvciBiZWluZyB0YXBwZWQhJyk7XG4vLyB9O1xuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxzQ0FBb0Q7QUFDcEQsdUNBQTZDO0FBQzdDLHVDQUE2QztBQW1CN0M7SUFqQkE7UUFrQkUsYUFBUSxHQUFHLElBQUksMEJBQWUsRUFBRSxDQUFDO1FBQ2pDLGlCQUFZLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUN4QyxlQUFVLEdBQXNCO1lBQzlCLElBQUksMEJBQWUsRUFBRTtZQUNyQixJQUFJLDBCQUFlLEVBQUU7WUFDckIsSUFBSSwwQkFBZSxFQUFFO1lBQ3JCLElBQUksMEJBQWUsRUFBRTtZQUNyQixJQUFJLDBCQUFlLEVBQUU7WUFDckIsSUFBSSwwQkFBZSxFQUFFO1lBQ3JCLElBQUksMEJBQWUsRUFBRTtTQUN0QixDQUFDO0lBV0osQ0FBQztJQVRDLG9DQUFhLEdBQWIsVUFBYyxJQUFJO1FBQ2hCLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLFdBQVcsRUFBRSxDQUFDO0lBQzVDLENBQUM7SUFHRCxrQ0FBVyxHQUFYO1FBQ0UsSUFBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQztRQUM1QixJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDL0MsQ0FBQztJQXJCVSxZQUFZO1FBakJ4QixnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFFBQVE7WUFDbEIsUUFBUSxFQUFFLG9kQVlLO1lBQ2YsaUNBQWlDO1NBQ2xDLENBQUM7T0FDVyxZQUFZLENBc0J4QjtJQUFELG1CQUFDO0NBQUEsQUF0QkQsSUFzQkM7QUF0Qlksb0NBQVkiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIE5nTW9kdWxlIH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcbmltcG9ydCB7IEhhYmJhamV0QmluZGluZyB9IGZyb20gXCIuL2hhYmJhamV0XCI7XG5pbXBvcnQgeyBDaGVja2JveEJpbmRpbmcgfSBmcm9tIFwiLi9jaGVja2JveFwiO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6IFwibXktYXBwXCIsXG4gIHRlbXBsYXRlOiBgPEFjdGlvbkJhciB0aXRsZT1cIkhhYmJhamV0XCIgY2xhc3M9XCJhY3Rpb24tYmFyXCI+PC9BY3Rpb25CYXI+XG5cbiAgPFN0YWNrTGF5b3V0PlxuICAgICAgPEltYWdlIFtzcmNdPVwiY3VycmVudEltYWdlXCI+PC9JbWFnZT5cbiAgICAgIDxCdXR0b24gdGV4dD1cIkVWT0xWRVwiICh0YXApPVwib25Fdm9sdmVUYXAoKVwiPjwvQnV0dG9uPlxuICAgICAgPExpc3RWaWV3IFtpdGVtc109XCJjaGVja2JveGVzXCIgKGl0ZW1UYXApPVwib25DaGVja2JveFRhcCgkZXZlbnQpXCI+XG4gICAgICA8bmctdGVtcGxhdGUgbGV0LWl0ZW09XCJpdGVtXCI+XG4gICAgICAgICAgPFN0YWNrTGF5b3V0PlxuICAgICAgICAgICAgICA8SW1hZ2UgW3NyY109XCJpbWFnZVwiPjwvSW1hZ2U+XG4gICAgICAgICAgPC9TdGFja0xheW91dD5cbiAgICAgIDwvbmctdGVtcGxhdGU+XG4gICAgICA8L0xpc3RWaWV3PlxuICA8L1N0YWNrTGF5b3V0PmBcbiAgLy8gdGVtcGxhdGVVcmw6IFwiLi9oYWJiYWpldC54bWxcIixcbn0pXG5leHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50IHtcbiAgaGFiYmFqZXQgPSBuZXcgSGFiYmFqZXRCaW5kaW5nKCk7XG4gIGN1cnJlbnRJbWFnZSA9IHRoaXMuaGFiYmFqZXQuZ2V0SW1hZ2UoKTtcbiAgY2hlY2tib3hlczogQ2hlY2tib3hCaW5kaW5nW10gPSBbXG4gICAgbmV3IENoZWNrYm94QmluZGluZygpLFxuICAgIG5ldyBDaGVja2JveEJpbmRpbmcoKSxcbiAgICBuZXcgQ2hlY2tib3hCaW5kaW5nKCksXG4gICAgbmV3IENoZWNrYm94QmluZGluZygpLFxuICAgIG5ldyBDaGVja2JveEJpbmRpbmcoKSxcbiAgICBuZXcgQ2hlY2tib3hCaW5kaW5nKCksXG4gICAgbmV3IENoZWNrYm94QmluZGluZygpXG4gIF07XG5cbiAgb25DaGVja2JveFRhcChhcmdzKSB7XG4gICAgdGhpcy5jaGVja2JveGVzW2FyZ3MuaW5kZXhdLmN5Y2xlU3RhdGVzKCk7XG4gIH1cblxuXG4gIG9uRXZvbHZlVGFwKCkge1xuICAgIHRoaXMuaGFiYmFqZXQuZXZvbHZlU3RhdGUoKTtcbiAgICB0aGlzLmN1cnJlbnRJbWFnZSA9IHRoaXMuaGFiYmFqZXQuZ2V0SW1hZ2UoKTtcbiAgfVxufVxuIl19
