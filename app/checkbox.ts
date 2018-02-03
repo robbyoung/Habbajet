@@ -7,8 +7,10 @@ enum CheckboxState {
 export class CheckboxBinding {
     public state: CheckboxState;
     public image: String;
+    public title: String;
 
-    constructor() {
+    constructor(title: string) {
+        this.title = title;
         this.state = CheckboxState.NEUTRAL;
         this.setImage();
     }
@@ -32,5 +34,14 @@ export class CheckboxBinding {
         } else if (this.state === CheckboxState.NEGATIVE) {
             this.image = "~/images/checkbox/Negative.png";
         }
+    }
+
+    isChecked() {
+        return this.state === CheckboxState.POSITIVE;
+    }
+
+    reset() {
+        this.state = CheckboxState.NEUTRAL;
+        this.image = "~/images/checkbox/Neutral.png";
     }
 }

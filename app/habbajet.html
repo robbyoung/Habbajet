@@ -1,0 +1,16 @@
+<ActionBar title="Habbajet" class="action-bar"></ActionBar>
+
+<StackLayout>
+    
+    <Image [src]="habbajet.image" class="creature"></Image>
+    
+    <ListView [items]="habbajet.checkboxes" (itemTap)="onCheckboxTap($event)" class="checkboxList">
+    <ng-template let-item="item">
+        <StackLayout orientation="horizontal">
+            <Label [text]="item.title" class="checkboxTitle"></Label>
+            <Image class="checkbox" [src]="item.image"></Image>
+        </StackLayout>
+    </ng-template>
+    </ListView>
+
+</StackLayout>

@@ -1,1 +1,40 @@
 @import "nativescript-theme-core/css/core.light.css";
+
+action-bar {
+    background-color: rgb(100, 5, 5);
+    color: white;
+    font-weight: bold;
+}
+
+.checkboxList {
+    margin: 10;
+    padding: 5;
+    background-color: rgb(221, 221, 221);
+    width: 170;
+    border-radius: 5;
+    color: black;
+    separator-color: transparent;
+}
+
+.checkbox {
+    width: 30;
+    height: 30;
+    float: right;
+}
+
+.checkboxTitle {
+    width: 120;
+    padding: 3;
+    padding-right: 6;
+    font-size: 20;
+    font-weight: bold;
+    vertical-align: center;
+    text-align: right;
+}
+
+.creature {
+    margin: 5;
+    border-color: black;
+    border-width: 3;
+    border-radius: 3;
+}
