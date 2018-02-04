@@ -1,6 +1,6 @@
-@import "nativescript-theme-core/css/core.light.css";
+/* @import "nativescript-theme-core/css/core.light.css"; */
 
-action-bar {
+.actionBar {
     background-color: rgb(100, 5, 5);
     color: white;
     font-weight: bold;
@@ -9,10 +9,11 @@ action-bar {
 .checkboxList {
     margin: 10;
     padding: 5;
-    background-color: rgb(221, 221, 221);
+    /* background-color: rgb(221, 221, 221); */
+    background-color: rgb(100, 5, 5);
     width: 170;
     border-radius: 5;
-    color: black;
+    color: white;
     separator-color: transparent;
 }
 
@@ -34,7 +35,19 @@ action-bar {
 
 .creature {
     margin: 5;
-    border-color: black;
+    /* border-color: rgb(221, 221, 221);
     border-width: 3;
-    border-radius: 3;
+    border-radius: 3; */
+}
+
+.moneyBox {
+    float: right;
+    background-color: rgb(100, 5, 5);
+    color: white;
+    width: 100;
+    border-radius: 5;
+    margin: 10;
+    padding: 6;
+    font-size: 22;
+    text-align: right;
 }

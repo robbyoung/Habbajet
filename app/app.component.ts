@@ -1,6 +1,7 @@
 import { Component, NgModule } from "@angular/core";
 import { HabbajetBinding } from "./habbajet";
 import { CheckboxBinding } from "./checkbox";
+import { BudgetBinding } from "./budget";
 import * as _ from 'lodash';
 
 
@@ -10,9 +11,10 @@ import * as _ from 'lodash';
 })
 
 export class AppComponent {
-  habbajet = new HabbajetBinding();
+  budget = new BudgetBinding();
+  habbajet = new HabbajetBinding(this.budget);
 
   onCheckboxTap(args) {
-    this.habbajet.checkboxStateUpdate(args.index);
+    this.habbajet.dailyUpdate(args.index);
   }
 }

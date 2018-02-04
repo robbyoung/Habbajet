@@ -40,6 +40,15 @@ export class CheckboxBinding {
         return this.state === CheckboxState.POSITIVE;
     }
 
+    isSet() {
+        return this.state !== CheckboxState.NEUTRAL;
+    }
+
+    fillCheckbox(success: boolean) {
+        this.state = success ? CheckboxState.POSITIVE: CheckboxState.NEGATIVE;
+        this.setImage();
+    }
+
     reset() {
         this.state = CheckboxState.NEUTRAL;
         this.image = "~/images/checkbox/Neutral.png";

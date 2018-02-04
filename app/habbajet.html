@@ -1,16 +1,22 @@
-<ActionBar title="Habbajet" class="action-bar"></ActionBar>
+<ActionBar title="Habbajet" class="actionBar"></ActionBar>
 
 <StackLayout>
     
     <Image [src]="habbajet.image" class="creature"></Image>
     
-    <ListView [items]="habbajet.checkboxes" (itemTap)="onCheckboxTap($event)" class="checkboxList">
-    <ng-template let-item="item">
-        <StackLayout orientation="horizontal">
-            <Label [text]="item.title" class="checkboxTitle"></Label>
-            <Image class="checkbox" [src]="item.image"></Image>
+    <GridLayout rows="65, 200" columns="200, 100">
+        <ListView row="0" col="0" rowspan="2" [items]="habbajet.checkboxes" (itemTap)="onCheckboxTap($event)" class="checkboxList">
+        <ng-template let-item="item">
+            <StackLayout orientation="horizontal">
+                <Label [text]="item.title" class="checkboxTitle"></Label>
+                <Image class="checkbox" [src]="item.image"></Image>
+            </StackLayout>
+        </ng-template>
+        </ListView>
+
+        <StackLayout row="0" col="1" class="moneyBox">
+            <Label [text]="budget.totalAmountString"></Label>
         </StackLayout>
-    </ng-template>
-    </ListView>
+    </GridLayout>
 
 </StackLayout>
