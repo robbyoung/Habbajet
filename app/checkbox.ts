@@ -9,9 +9,13 @@ export class CheckboxBinding {
     public image: String;
     public title: String;
 
-    constructor(title: string) {
+    constructor(title: string, private saveObject: any, private index: number, isNew: boolean) {
         this.title = title;
-        this.state = CheckboxState.NEUTRAL;
+        if(isNew) {
+            this.state = CheckboxState.NEUTRAL;
+        } else {
+            this.state = this.saveObject.getNumber(this.title + "" + this.index);
+        }
         this.setImage();
     }
 
@@ -34,6 +38,7 @@ export class CheckboxBinding {
         } else if (this.state === CheckboxState.NEGATIVE) {
             this.image = "~/images/checkbox/Negative.png";
         }
+        this.saveData();
     }
 
     isChecked() {
@@ -51,6 +56,10 @@ export class CheckboxBinding {
 
     reset() {
         this.state = CheckboxState.NEUTRAL;
-        this.image = "~/images/checkbox/Neutral.png";
+        this.setImage();
+    }
+
+    saveData() {
+        this.saveObject.setNumber(this.title + "" + this.index, this.state);
     }
 }

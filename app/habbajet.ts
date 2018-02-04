@@ -8,22 +8,28 @@ export class HabbajetBinding {
   private frameIndex: number;
   public image: string;
   public checkboxes: CheckboxBinding[];
-  public budget: BudgetBinding;
 
-  constructor(budget: BudgetBinding) {
-    this.stateIndex = 0;
-    this.frameIndex = 0;
-    this.setImage();
+  constructor(private budget: BudgetBinding, private saveObject: any,
+      private index: number, public name: string, isNew: boolean) {
+    
     this.checkboxes = [
-      new CheckboxBinding("Sunday"),
-      new CheckboxBinding("Monday"),
-      new CheckboxBinding("Tuesday"),
-      new CheckboxBinding("Wednesday"),
-      new CheckboxBinding("Thursday"),
-      new CheckboxBinding("Friday"),
-      new CheckboxBinding("Saturday")
+      new CheckboxBinding("Sunday", saveObject, index, isNew),
+      new CheckboxBinding("Monday", saveObject, index, isNew),
+      new CheckboxBinding("Tuesday", saveObject, index, isNew),
+      new CheckboxBinding("Wednesday", saveObject, index, isNew),
+      new CheckboxBinding("Thursday", saveObject, index, isNew),
+      new CheckboxBinding("Friday", saveObject, index, isNew),
+      new CheckboxBinding("Saturday", saveObject, index, isNew)
     ];
-    this.budget = budget;
+    this.frameIndex = 0;
+    if(isNew) {
+      this.stateIndex = 0;
+      this.saveData();
+    } else {
+      this.name = saveObject.getString("h" + this.index + "name");
+      this.stateIndex = saveObject.getNumber("h" + this.index + "stateIndex");
+    }
+    this.setImage();
   }
 
   async dailyUpdate(index: number) {
@@ -34,9 +40,13 @@ export class HabbajetBinding {
       message: "Did you accomplish your habit goals for today?",
       okButtonText: "Yes",
       cancelButtonText: "No",
+      neutralButtonText: "Cancel",
     }).then((success) => {
-      checkbox.fillCheckbox(success);
-      this.checkboxStateUpdate();
+      if(success !== undefined) {
+        checkbox.fillCheckbox(success);
+        this.checkboxStateUpdate();
+        this.saveData();
+      }
     });
   }
 
@@ -74,6 +84,11 @@ export class HabbajetBinding {
       c.reset();
     });
     this.setState(0);
+  }
+
+  saveData() {
+    this.saveObject.setString("h" + this.index + "name", this.name);
+    this.stateIndex = this.saveObject.setNumber("h" + this.index + "stateIndex", this.stateIndex);
   }
 
 }
