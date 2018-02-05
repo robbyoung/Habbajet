@@ -71,6 +71,7 @@ export class HabbajetBinding {
 
   setImage() {
     this.image = "~/images/habbajet" + this.stateIndex + "_" + this.frameIndex + ".png";
+    console.log("image changed to: " + this.image);
   }
 
   setState(newState: number) {
@@ -88,7 +89,7 @@ export class HabbajetBinding {
 
   saveData() {
     this.saveObject.setString("h" + this.index + "name", this.name);
-    this.stateIndex = this.saveObject.setNumber("h" + this.index + "stateIndex", this.stateIndex);
+    this.saveObject.setNumber("h" + this.index + "stateIndex", this.stateIndex);
   }
 
 }

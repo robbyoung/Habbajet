@@ -11,14 +11,14 @@ import * as Dialogs from 'ui/dialogs';
   templateUrl: "./habbajet.html",
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   public habbajetList: HabbajetBinding[];
   public habbajet: HabbajetBinding;
   public habbajetIndex: number;
   public budget: BudgetBinding;
   public saveObject: any;
 
-  ngOnInit() {
+  constructor() {
     this.saveObject = require("application-settings");
     this.budget = new BudgetBinding(this.saveObject);
     this.habbajetList =[];
@@ -33,14 +33,10 @@ export class AppComponent implements OnInit {
       for(let i = 0; i < habbajetCount; i++) {
         this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject, i, "", false));
       }
-    } else {
-      const name = "First Habbajet";
-      this.habbajetIndex = this.habbajetList.length;
-      this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject,
-         this.habbajetIndex, name, true));
-      this.habbajet = this.habbajetList[this.habbajetIndex];
-      this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
-      // this.newHabbajet();
+      if(habbajetCount > 0) {
+        this.habbajetIndex = 0;
+        this.habbajet = this.habbajetList[this.habbajetIndex];
+      }
     }
   }
 

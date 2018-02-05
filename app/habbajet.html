@@ -1,12 +1,13 @@
 <ActionBar title="Habbajet" class="actionBar"></ActionBar>
 
 <StackLayout>
-    <Label [text]="habbajet.name" class="title"></Label>
+    <Label [text]="habbajet ? habbajet.name : ''" class="title" [visibility]="habbajet ? 'visible' : 'collapse'"></Label>
 
-    <Image [src]="habbajet.image" class="creature"></Image>
+    <Image [src]="habbajet ? habbajet.image : undefined" class="creature" [visibility]="habbajet ? 'visible' : 'collapse'"></Image>
+    <Label text="Create your First Habbajet!" (tap)="newHabbajet()" class="introScreen" [visibility]="habbajet ? 'collapse' : 'visible'"></Label>
     
-    <GridLayout rows="65, 100, 100" columns="200, 100">
-        <ListView row="0" col="0" rowspan="3" [items]="habbajet.checkboxes" (itemTap)="onCheckboxTap($event)" class="checkboxList">
+    <GridLayout rows="65, 100, 100" columns="200, 100" [visibility]="habbajet ? 'visible' : 'collapse'">
+        <ListView row="0" col="0" rowspan="3" [items]="habbajet ? habbajet.checkboxes : []" (itemTap)="onCheckboxTap($event)" class="checkboxList">
         <ng-template let-item="item">
             <StackLayout orientation="horizontal">
                 <Label [text]="item.title" class="checkboxTitle"></Label>
@@ -21,5 +22,4 @@
         <Label row="1" col="1" text="NEW" (tap)="newHabbajet()" class="moneyBox"></Label>
         <Label row="2" col="1" text="NEXT" (tap)="nextHabbajet()" class="moneyBox"></Label>
     </GridLayout>
-
 </StackLayout>

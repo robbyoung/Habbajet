@@ -57,3 +57,14 @@
     color: black;
     text-align: center;
 }
+
+.introScreen {
+    float: right;
+    background-color: rgb(100, 5, 5);
+    color: white;
+    border-radius: 5;
+    margin: 10;
+    padding: 6;
+    font-size: 22;
+    text-align: right;
+}
