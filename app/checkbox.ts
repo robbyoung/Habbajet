@@ -6,8 +6,8 @@ enum CheckboxState {
 
 export class CheckboxBinding {
     public state: CheckboxState;
-    public image: String;
-    public title: String;
+    public image: string;
+    public title: string;
 
     constructor(title: string, private saveObject: any, private index: number, isNew: boolean) {
         this.title = title;

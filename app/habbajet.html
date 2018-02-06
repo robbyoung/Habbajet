@@ -1,12 +1,25 @@
 <ActionBar title="Habbajet" class="actionBar"></ActionBar>
 
 <StackLayout>
-    <Label [text]="habbajet ? habbajet.name : ''" class="title" [visibility]="habbajet ? 'visible' : 'collapse'"></Label>
+    <Label text="Create New Habbajet" (tap)="newHabbajet()" class="addButton" [visibility]="habbajet ? 'collapse' : 'visible'"></Label>
 
-    <Image [src]="habbajet ? habbajet.image : undefined" class="creature" [visibility]="habbajet ? 'visible' : 'collapse'"></Image>
-    <Label text="Create your First Habbajet!" (tap)="newHabbajet()" class="introScreen" [visibility]="habbajet ? 'collapse' : 'visible'"></Label>
-    
-    <GridLayout rows="65, 100, 100" columns="200, 100" [visibility]="habbajet ? 'visible' : 'collapse'">
+    <GridLayout rows="auto,40,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid">
+        <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture"></Image>
+        <Label [text]="habbajet ? habbajet.name : ''" row="1" col="0" colspan="6"></Label>
+        <Label [text]="habbajet ? habbajet.activeDay : ''" row="2" col="0" colspan="5"></Label>
+        <Image src="~/images/checkbox/Positive.png" row="2" col="5"></Image>
+        <Image src="~/images/checkbox/Negative.png" row="2" col="6"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="3" col="0"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[1].image : undefined" row="3" col="1"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[2].image : undefined" row="3" col="2"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[3].image : undefined" row="3" col="3"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[4].image : undefined" row="3" col="4"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[5].image : undefined" row="3" col="5"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[6].image : undefined" row="3" col="6"></Image>
+
+    </GridLayout>
+
+    <!-- <GridLayout rows="65, 100, 100" columns="200, 100" [visibility]="habbajet ? 'visible' : 'collapse'">
         <ListView row="0" col="0" rowspan="3" [items]="habbajet ? habbajet.checkboxes : []" (itemTap)="onCheckboxTap($event)" class="checkboxList">
         <ng-template let-item="item">
             <StackLayout orientation="horizontal">
@@ -21,5 +34,5 @@
         </StackLayout>
         <Label row="1" col="1" text="NEW" (tap)="newHabbajet()" class="moneyBox"></Label>
         <Label row="2" col="1" text="NEXT" (tap)="nextHabbajet()" class="moneyBox"></Label>
-    </GridLayout>
+    </GridLayout> -->
 </StackLayout>

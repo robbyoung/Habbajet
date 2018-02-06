@@ -8,6 +8,7 @@ export class HabbajetBinding {
   private frameIndex: number;
   public image: string;
   public checkboxes: CheckboxBinding[];
+  public activeDay: string;
 
   constructor(private budget: BudgetBinding, private saveObject: any,
       private index: number, public name: string, isNew: boolean) {
@@ -29,6 +30,7 @@ export class HabbajetBinding {
       this.name = saveObject.getString("h" + this.index + "name");
       this.stateIndex = saveObject.getNumber("h" + this.index + "stateIndex");
     }
+    this.setActiveDay();
     this.setImage();
   }
 
@@ -67,6 +69,7 @@ export class HabbajetBinding {
     } else {
       this.setState(newState);
     }
+    this.setActiveDay();
   }
 
   setImage() {
@@ -85,6 +88,15 @@ export class HabbajetBinding {
       c.reset();
     });
     this.setState(0);
+  }
+
+  setActiveDay() {
+    for(let i = 0; i < this.checkboxes.length; i++) {
+      if (!this.checkboxes[i].isSet()) {
+        this.activeDay = this.checkboxes[i].title;
+        return;
+      }
+    }
   }
 
   saveData() {

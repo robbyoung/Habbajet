@@ -17,6 +17,7 @@ export class AppComponent {
   public habbajetIndex: number;
   public budget: BudgetBinding;
   public saveObject: any;
+  public tabWidth: number;
 
   constructor() {
     this.saveObject = require("application-settings");

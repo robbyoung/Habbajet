@@ -1,21 +1,56 @@
 /* @import "nativescript-theme-core/css/core.light.css"; */
 
 .actionBar {
-    background-color: rgb(100, 5, 5);
-    color: white;
+    background-color: rgb(37, 37, 37);
+    color: rgb(235, 235, 235);
     font-weight: bold;
 }
 
-.checkboxList {
+.checkboxGrid {
+    margin: auto;
+    margin-top: 10;
+    padding: 10;
+    width: 335;
+    font-size: 25;
+    background-color: rgb(37, 37, 37);
+    color: rgb(235, 235, 235);
+    border-radius: 5;
+}
+
+.checkboxGrid > Label {
+    vertical-align: center;
+    padding-left: 5;
+}
+
+.addButton {
+    background-color: rgb(37, 37, 37);
+    color: rgb(235, 235, 235);
+    border-radius: 5;
+    margin: 10;
+    padding: 6;
+    font-size: 22;
+    text-align: center;
+}
+
+Image {
+    width: 30;
+    vertical-align: center;
+}
+
+.bigPicture {
+    width: 315;
+}
+
+/* .checkboxList {
     margin: 10;
     padding: 5;
-    /* background-color: rgb(221, 221, 221); */
+    /* background-color: rgb(221, 221, 221);
     background-color: rgb(100, 5, 5);
     width: 170;
     border-radius: 5;
     color: white;
     separator-color: transparent;
-}
+} */
 
 .checkbox {
     width: 30;
@@ -56,15 +91,4 @@
     font-size: 22;
     color: black;
     text-align: center;
-}
-
-.introScreen {
-    float: right;
-    background-color: rgb(100, 5, 5);
-    color: white;
-    border-radius: 5;
-    margin: 10;
-    padding: 6;
-    font-size: 22;
-    text-align: right;
 }
