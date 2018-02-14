@@ -8,9 +8,9 @@ export class FrameCounts {
     constructor() {
 
         this.tFrames = [
+            0,
             19,
-            0,
-            0,
+            10,
             0,
             0,
             0,
@@ -19,18 +19,18 @@ export class FrameCounts {
 
         this.iFrames = [
             10,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            9,
+            6,
+            1,
+            1,
+            1,
+            1,
         ];
 
         this.aFrames = [
-            0,
-            0,
-            0,
+            14,
+            13,
+            7,
             0,
             0,
             0,
@@ -38,13 +38,24 @@ export class FrameCounts {
         ];
 
         this.bFrames = [
-            0,
-            0,
-            0,
+            18,
+            11,
+            6,
             0,
             0,
             0,
             0,
         ];
+    }
+
+    exists(state: number, frame: number, action: string): boolean {
+        if(frame < 0) return false;
+        switch(action) {
+            case('t'): return this.tFrames[state] > frame;
+            case('i'): return this.iFrames[state] > frame;
+            case('a'): return this.aFrames[state] > frame;
+            case('b'): return this.bFrames[state] > frame;
+            default: return false;
+        }
     }
 }

@@ -3,12 +3,12 @@
 <StackLayout>
     <Label text="Create New Habbajet" (tap)="newHabbajet()" class="addButton" [visibility]="habbajet ? 'collapse' : 'visible'"></Label>
 
-    <GridLayout rows="auto,40,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid">
-        <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture"></Image>
-        <Label [text]="habbajet ? habbajet.name : ''" row="1" col="0" colspan="6"></Label>
-        <Label [text]="habbajet ? habbajet.activeDay : ''" row="2" col="0" colspan="5"></Label>
-        <Image src="~/images/checkbox/Positive.png" row="2" col="5"></Image>
-        <Image src="~/images/checkbox/Negative.png" row="2" col="6"></Image>
+    <GridLayout rows="auto,50,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid">
+        <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture" (tap)="onImageTap()"></Image>
+        <Label [text]="habbajet ? habbajet.name : ''" row="1" col="0" colspan="6" class="habbajetName"></Label>
+        <Label [text]="habbajet ? habbajet.activeDay.title : ''" row="2" col="0" colspan="5"  class="date"></Label>
+        <Image src="~/images/checkbox/Positive.png" row="2" col="5" (tap)="check()"></Image>
+        <Image src="~/images/checkbox/Negative.png" row="2" col="6" (tap)="cross()"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="3" col="0"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[1].image : undefined" row="3" col="1"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[2].image : undefined" row="3" col="2"></Image>
@@ -16,7 +16,6 @@
         <Image [src]="habbajet ? habbajet.checkboxes[4].image : undefined" row="3" col="4"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[5].image : undefined" row="3" col="5"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[6].image : undefined" row="3" col="6"></Image>
-
     </GridLayout>
 
     <!-- <GridLayout rows="65, 100, 100" columns="200, 100" [visibility]="habbajet ? 'visible' : 'collapse'">

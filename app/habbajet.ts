@@ -2,16 +2,23 @@ import { CheckboxBinding } from "./checkbox";
 import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
 import { BudgetBinding } from "./budget";
+import { FrameCounts } from "./frame-counts";
 
 export class HabbajetBinding {
-  private stateIndex: number;
-  private frameIndex: number;
+  private state: number;
+  private frame: number;
+  private action: string;
   public image: string;
   public checkboxes: CheckboxBinding[];
-  public activeDay: string;
+  public activeDay: CheckboxBinding;
+  public animating: boolean;
+  public animationID: number;
+
+  private transforming: boolean;
+  private acting: boolean;
 
   constructor(private budget: BudgetBinding, private saveObject: any,
-      private index: number, public name: string, isNew: boolean) {
+      private index: number, public name: string, isNew: boolean, private frames: FrameCounts) {
     
     this.checkboxes = [
       new CheckboxBinding("Sunday", saveObject, index, isNew),
@@ -22,34 +29,27 @@ export class HabbajetBinding {
       new CheckboxBinding("Friday", saveObject, index, isNew),
       new CheckboxBinding("Saturday", saveObject, index, isNew)
     ];
-    this.frameIndex = 0;
+    this.acting = false;
+    this. transforming = false;
+    this.action = 'i';
+    this.frame = 0;
     if(isNew) {
-      this.stateIndex = 0;
+      this.state = 0;
       this.saveData();
     } else {
       this.name = saveObject.getString("h" + this.index + "name");
-      this.stateIndex = saveObject.getNumber("h" + this.index + "stateIndex");
+      this.state = saveObject.getNumber("h" + this.index + "stateIndex");
     }
     this.setActiveDay();
-    this.setImage();
+    this.setState(this.state);
   }
 
-  async dailyUpdate(index: number) {
-    const checkbox = this.checkboxes[index];
-    if(checkbox.isSet()) return;
-    Dialogs.confirm({
-      title: checkbox.title + '',
-      message: "Did you accomplish your habit goals for today?",
-      okButtonText: "Yes",
-      cancelButtonText: "No",
-      neutralButtonText: "Cancel",
-    }).then((success) => {
-      if(success !== undefined) {
-        checkbox.fillCheckbox(success);
-        this.checkboxStateUpdate();
-        this.saveData();
-      }
-    });
+  dailyUpdate(success: boolean) {
+    if(!this.isBusy()) {
+      this.activeDay.fillCheckbox(success);
+      this.checkboxStateUpdate();
+      this.saveData();
+    }
   }
 
   checkboxStateUpdate() {
@@ -73,13 +73,36 @@ export class HabbajetBinding {
   }
 
   setImage() {
-    this.image = "~/images/habbajet" + this.stateIndex + "_" + this.frameIndex + ".png";
-    console.log("image changed to: " + this.image);
+    this.image = "~/images/h" + this.state + "/" + this.action + this.frame + ".png";
+    // console.log("image changed to: " + this.image);
+  }
+
+  animate() {
+      if(this.frames.exists(this.state, this.frame, this.action)) {
+        this.setImage();
+      } else {
+        this.makeIdle();
+      }
+      this.frame++;
+  }
+
+  makeIdle() {
+    this.resetBusiness();
+    this.action = 'i';
+    this.restartAnimation();
+  }
+
+  restartAnimation() {
+    clearInterval(this.animationID);
+    this.frame = 0;
+    this.animationID = setInterval(() => {
+      this.animate();
+    }, 100);
   }
 
   setState(newState: number) {
-    this.stateIndex = newState;
-    this.setImage();
+    this.state = newState;
+    this.transform();
   }
 
   endWeek(successes: number) {
@@ -93,7 +116,7 @@ export class HabbajetBinding {
   setActiveDay() {
     for(let i = 0; i < this.checkboxes.length; i++) {
       if (!this.checkboxes[i].isSet()) {
-        this.activeDay = this.checkboxes[i].title;
+        this.activeDay = this.checkboxes[i];
         return;
       }
     }
@@ -101,7 +124,35 @@ export class HabbajetBinding {
 
   saveData() {
     this.saveObject.setString("h" + this.index + "name", this.name);
-    this.saveObject.setNumber("h" + this.index + "stateIndex", this.stateIndex);
+    this.saveObject.setNumber("h" + this.index + "stateIndex", this.state);
   }
 
+  transform() {
+    this.transforming = true;
+    this.action = 't';
+    this.restartAnimation();
+  }
+
+  act() {
+    if (this.isBusy()) {
+      return;
+    }
+    this.transforming = false;
+    const actionType = Math.random() * 2
+    if(actionType < 1) {
+      this.action = 'a';
+    } else {
+      this.action = 'b';
+    }
+    this.restartAnimation();
+  }
+
+  resetBusiness() {
+    this.acting = false;
+    this.transforming = false;
+  }
+
+  isBusy() {
+    return this.acting || this.transforming;
+  }
 }

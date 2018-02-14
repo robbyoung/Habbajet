@@ -41,6 +41,14 @@ Image {
     width: 315;
 }
 
+.habbajetName {
+    font-size: 30;
+}
+
+.date {
+    vertical-align: center;
+}
+
 /* .checkboxList {
     margin: 10;
     padding: 5;

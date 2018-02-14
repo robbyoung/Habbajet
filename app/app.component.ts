@@ -4,7 +4,7 @@ import { CheckboxBinding } from "./checkbox";
 import { BudgetBinding } from "./budget";
 import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
-
+import { FrameCounts } from "./frame-counts";
 
 @Component({
   selector: "my-app",
@@ -18,10 +18,12 @@ export class AppComponent {
   public budget: BudgetBinding;
   public saveObject: any;
   public tabWidth: number;
+  public frames: FrameCounts;
 
   constructor() {
     this.saveObject = require("application-settings");
     this.budget = new BudgetBinding(this.saveObject);
+    this.frames = new FrameCounts();
     this.habbajetList =[];
     this.loadSavedData();
   }
@@ -32,7 +34,7 @@ export class AppComponent {
       this.budget.setTotal(totalValue);
       const habbajetCount = this.saveObject.getNumber("habbajetCount");
       for(let i = 0; i < habbajetCount; i++) {
-        this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject, i, "", false));
+        this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject, i, "", false, this.frames));
       }
       if(habbajetCount > 0) {
         this.habbajetIndex = 0;
@@ -50,12 +52,10 @@ export class AppComponent {
       name = result.text;
       this.habbajetIndex = this.habbajetList.length;
       this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject,
-         this.habbajetIndex, name, true));
+         this.habbajetIndex, name, true, this.frames));
       this.habbajet = this.habbajetList[this.habbajetIndex];
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
     });
-
-    
   }
 
   nextHabbajet() {
@@ -65,5 +65,17 @@ export class AppComponent {
 
   onCheckboxTap(args) {
     this.habbajet.dailyUpdate(args.index);
+  }
+
+  check() {
+    this.habbajet.dailyUpdate(true);
+  }
+
+  cross() {
+    this.habbajet.dailyUpdate(false);
+  }
+
+  onImageTap() {
+    this.habbajet.act();
   }
 }
