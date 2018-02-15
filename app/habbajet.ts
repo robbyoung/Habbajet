@@ -101,8 +101,13 @@ export class HabbajetBinding {
   }
 
   setState(newState: number) {
+    const oldState = this.state;
     this.state = newState;
-    this.transform();
+    if(newState !== oldState) {
+      this.transform();
+    } else {
+      this.makeIdle();
+    }
   }
 
   endWeek(successes: number) {

@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import * as Dialogs from 'ui/dialogs';
 
 export class BudgetBinding {
 
@@ -15,6 +16,7 @@ export class BudgetBinding {
 
     setTotalAmountString() {
         this.totalAmountString = '$' + this.totalAmount.toFixed(2);
+        this.saveObject.setNumber("total", this.totalAmount);
     }
 
     updateTotal(successes: number) {
@@ -24,12 +26,24 @@ export class BudgetBinding {
         }
 
         this.totalAmount += weeklyIncome;
-        this.saveObject.setNumber("total", this.totalAmount);
         this.setTotalAmountString();
     }
 
     setTotal(newTotal: number) {
         this.totalAmount = parseFloat(newTotal.toFixed(2));
         this.setTotalAmountString();
+    }
+
+    makePurchase() {
+        Dialogs.prompt({
+            title: "New Purchase",
+            message: "How much did you spend?",
+            okButtonText: "Confirm",
+          }).then((result) => {
+                const purchaseAmount = _.toNumber(result.text) as number;
+                if(purchaseAmount !== undefined) {
+                    this.setTotal(this.totalAmount - purchaseAmount);
+                }
+          });
     }
 }

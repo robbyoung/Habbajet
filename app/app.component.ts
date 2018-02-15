@@ -58,13 +58,19 @@ export class AppComponent {
     });
   }
 
-  nextHabbajet() {
-    this.habbajetIndex = (this.habbajetIndex + 1) % this.habbajetList.length;
-    this.habbajet = this.habbajetList[this.habbajetIndex];
+  selectHabbajet(index: number) {
+    if (this.habbajetList.length > index) {
+      this.habbajetIndex = index;
+      this.habbajet = this.habbajetList[this.habbajetIndex];
+    }
   }
 
   onCheckboxTap(args) {
     this.habbajet.dailyUpdate(args.index);
+  }
+
+  onPurchaseTap(args) {
+    this.budget.makePurchase();
   }
 
   check() {

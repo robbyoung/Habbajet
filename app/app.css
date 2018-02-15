@@ -1,8 +1,8 @@
 /* @import "nativescript-theme-core/css/core.light.css"; */
 
 .actionBar {
-    background-color: rgb(37, 37, 37);
-    color: rgb(235, 235, 235);
+    background-color: #252525;
+    color: #ebebeb;
     font-weight: bold;
 }
 
@@ -12,8 +12,8 @@
     padding: 10;
     width: 335;
     font-size: 25;
-    background-color: rgb(37, 37, 37);
-    color: rgb(235, 235, 235);
+    background-color: #252525;
+    color: #ebebeb;
     border-radius: 5;
 }
 
@@ -23,8 +23,8 @@
 }
 
 .addButton {
-    background-color: rgb(37, 37, 37);
-    color: rgb(235, 235, 235);
+    background-color: #252525;
+    color: #ebebeb;
     border-radius: 5;
     margin: 10;
     padding: 6;
@@ -47,6 +47,27 @@ Image {
 
 .date {
     vertical-align: center;
+}
+
+.tab {
+    color: #ebebeb;
+    font-weight: bold;
+}
+
+.moneyBox {
+    background-color: #252525;
+    color: #ebebeb;
+    border-radius: 5;
+    font-size: 30;
+    padding: 5;
+    text-align: right;
+    vertical-align: center;
+}
+
+.budgetGrid {
+    margin: auto;
+    margin-top: 10;
+    padding: 10;
 }
 
 /* .checkboxList {
@@ -81,18 +102,6 @@ Image {
     /* border-color: rgb(221, 221, 221);
     border-width: 3;
     border-radius: 3; */
-}
-
-.moneyBox {
-    float: right;
-    background-color: rgb(100, 5, 5);
-    color: white;
-    width: 100;
-    border-radius: 5;
-    margin: 10;
-    padding: 6;
-    font-size: 22;
-    text-align: right;
 }
 
 .title {
