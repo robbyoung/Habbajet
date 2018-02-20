@@ -40,10 +40,14 @@ export class BudgetBinding {
             message: "How much did you spend?",
             okButtonText: "Confirm",
           }).then((result) => {
-                const purchaseAmount = _.toNumber(result.text) as number;
-                if(purchaseAmount !== undefined) {
+                const purchaseAmount = _.toNumber(result.text);
+                if(this.verifyPurchase(purchaseAmount)) {
                     this.setTotal(this.totalAmount - purchaseAmount);
                 }
           });
+    }
+
+    verifyPurchase(amount: any): boolean {
+        return isFinite(amount) && amount > 0 && amount < this.totalAmount;
     }
 }
