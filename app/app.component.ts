@@ -19,12 +19,16 @@ export class AppComponent {
   public saveObject: any;
   public tabWidth: number;
   public frames: FrameCounts;
+  public newHabbajetName: string;
+  public newHabbajetValue: string;
 
   constructor() {
     this.saveObject = require("application-settings");
     this.budget = new BudgetBinding(this.saveObject);
     this.frames = new FrameCounts();
     this.habbajetList =[];
+    this.newHabbajetName="";
+    this.newHabbajetValue="";
     this.loadSavedData();
   }
 
@@ -44,18 +48,13 @@ export class AppComponent {
   }
 
   newHabbajet() {
-    let name: string;
-    Dialogs.prompt({
-      title: "Name the new Habbajet",
-      okButtonText: "Confirm",
-    }).then((result) => {
-      name = result.text;
+    if(this.isValidName() && this.isValidValue()) {
       this.habbajetIndex = this.habbajetList.length;
       this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject,
-         this.habbajetIndex, name, true, this.frames));
+          this.habbajetIndex, this.newHabbajetName, true, this.frames));
       this.habbajet = this.habbajetList[this.habbajetIndex];
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
-    });
+    }
   }
 
   selectHabbajet(index: number) {
@@ -83,5 +82,14 @@ export class AppComponent {
 
   onImageTap() {
     this.habbajet.act();
+  }
+
+  isValidName(): boolean {
+    return this.newHabbajetName.length > 0;
+  }
+
+  isValidValue(): boolean {
+    const value = _.toNumber(this.newHabbajetValue);
+    return isFinite(value) && value > 0;
   }
 }
