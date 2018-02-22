@@ -4,9 +4,9 @@
     <StackLayout [visibility]="habbajet ? 'collapse' : 'visible'">
         <GridLayout rows="100, 200" columns="auto, auto"></GridLayout>
             <Label text="Name: "></Label>
-            <TextField row="0" col="1" [text]="newHabbajetName" id="nameField"></TextField>
+            <TextField row="0" col="1" [text]="newHabbajetName" (textChange)="nameChange($event)" id="nameField"></TextField>
             <Label text="Value: "></Label>
-            <TextField row="1"  [text]="newHabbajetValue" id="valueField"></TextField>
+            <TextField row="1"  [text]="newHabbajetValue" (textChange)="valueChange($event)" id="valueField"></TextField>
         <Label text="Create New Habbajet" (tap)="newHabbajet()" class="addButton"></Label>
     </StackLayout>
 
@@ -22,8 +22,8 @@
         <Image [src]="habbajet ? habbajet.image : undefined" row="1" col="0" colspan="7" className="bigPicture" (tap)="onImageTap()"></Image>
         <Label [text]="habbajet ? habbajet.name : ''" row="2" col="0" colspan="6" class="habbajetName"></Label>
         <Label [text]="habbajet ? habbajet.activeDay.title : ''" row="3" col="0" colspan="5"  class="date"></Label>
-        <!-- <Image src="~/images/checkbox/Positive.png" row="3" col="5" (tap)="check()"></Image>
-        <Image src="~/images/checkbox/Negative.png" row="3" col="6" (tap)="cross()"></Image> -->
+
+        <Label row="2" col="4" colspan="3" [text]="budget.totalAmountString" (tap)="onPurchaseTap()" class="money"></Label>
 
         
         <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="4" col="0"></Image>
@@ -36,8 +36,8 @@
     </GridLayout>
 
     <GridLayout rows="90" columns="45, 100, 50, 100, 45" class="responseGrid" [visibility]="habbajet ? 'visible' : 'collapse'">
-        <Image src="~/images/checkbox/ActiveCheck.png" row="0" col="1" (tap)="check()" class="button"></Image>
-        <Image src="~/images/checkbox/ActiveCross.png" row="0" col="3" (tap)="cross()" class="button"></Image>
+        <Image [src]="habbajet ? (habbajet.transforming ? '~/images/checkbox/InactiveCheck.png' : '~/images/checkbox/ActiveCheck.png') : ''" row="0" col="1" (tap)="check()" class="button"></Image>
+        <Image [src]="habbajet ? (habbajet.transforming ? '~/images/checkbox/InactiveCross.png' : '~/images/checkbox/ActiveCross.png') : ''" row="0" col="3" (tap)="cross()" class="button"></Image>
     </GridLayout>
 
     <!-- <GridLayout rows="40" columns="150,20,150" class="budgetGrid">

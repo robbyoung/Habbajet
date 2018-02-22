@@ -32,6 +32,11 @@
     text-align: center;
 }
 
+.money {
+    font-size: 30;
+    text-align: right;
+}
+
 Image {
     width: 30;
     vertical-align: center;
@@ -50,7 +55,7 @@ Image {
 }
 
 .tab {
-    color: #ebebeb;
+    background-color: #ebebeb;
     font-weight: bold;
 }
 

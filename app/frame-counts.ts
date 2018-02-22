@@ -13,7 +13,7 @@ export class FrameCounts {
             14,
             10,
             12,
-            0,
+            9,
             0,
         ];
 
@@ -23,7 +23,7 @@ export class FrameCounts {
             6,
             6,
             7,
-            1,
+            5,
             1,
         ];
 

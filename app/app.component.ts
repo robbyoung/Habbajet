@@ -4,6 +4,7 @@ import { CheckboxBinding } from "./checkbox";
 import { BudgetBinding } from "./budget";
 import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
+import { TextField } from "ui/text-field";
 import { FrameCounts } from "./frame-counts";
 
 @Component({
@@ -15,6 +16,7 @@ export class AppComponent {
   public habbajetList: HabbajetBinding[];
   public habbajet: HabbajetBinding;
   public habbajetIndex: number;
+  public habbajetCount: number;
   public budget: BudgetBinding;
   public saveObject: any;
   public tabWidth: number;
@@ -38,23 +40,25 @@ export class AppComponent {
       this.budget.setTotal(totalValue);
       const habbajetCount = this.saveObject.getNumber("habbajetCount");
       for(let i = 0; i < habbajetCount; i++) {
-        this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject, i, "", false, this.frames));
+        this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject, i, "", false, this.frames, ""));
       }
       if(habbajetCount > 0) {
         this.habbajetIndex = 0;
         this.habbajet = this.habbajetList[this.habbajetIndex];
       }
     }
+    this.habbajetCount = this.habbajetList.length + 1;
   }
 
   newHabbajet() {
     if(this.isValidName() && this.isValidValue()) {
       this.habbajetIndex = this.habbajetList.length;
       this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject,
-          this.habbajetIndex, this.newHabbajetName, true, this.frames));
+          this.habbajetIndex, this.newHabbajetName, true, this.frames, this.newHabbajetValue));
       this.habbajet = this.habbajetList[this.habbajetIndex];
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
     }
+    this.habbajetCount = this.habbajetList.length + 1;
   }
 
   selectHabbajet(index: number) {
@@ -91,5 +95,15 @@ export class AppComponent {
   isValidValue(): boolean {
     const value = _.toNumber(this.newHabbajetValue);
     return isFinite(value) && value > 0;
+  }
+
+  nameChange(args) {
+    let textField = <TextField>args.object;
+    this.newHabbajetName = textField.text;
+  }
+
+  valueChange(args) {
+    let textField = <TextField>args.object;
+    this.newHabbajetValue = textField.text;
   }
 }

@@ -6,12 +6,9 @@ export class BudgetBinding {
     private totalAmount: number;
     public totalAmountString: string;
 
-    public weeklyAmount: number;
-
     constructor(private saveObject: any) {
         this.totalAmount = 0
         this.setTotalAmountString();
-        this.weeklyAmount = 200;
     }
 
     setTotalAmountString() {
@@ -19,8 +16,9 @@ export class BudgetBinding {
         this.saveObject.setNumber("total", this.totalAmount);
     }
 
-    updateTotal(successes: number) {
-        let weeklyIncome = this.weeklyAmount;
+    updateTotal(successes: number, value: string) {
+        let weeklyMax = _.toNumber(value);
+        let weeklyIncome = weeklyMax;
         for(let failures = 0; failures + successes < 7; failures++) {
             weeklyIncome /= 2;
         }

@@ -14,11 +14,12 @@ export class HabbajetBinding {
   public animating: boolean;
   public animationID: number;
 
-  private transforming: boolean;
+  public transforming: boolean;
   private acting: boolean;
 
   constructor(private budget: BudgetBinding, private saveObject: any,
-      private index: number, public name: string, isNew: boolean, private frames: FrameCounts) {
+      private index: number, public name: string, isNew: boolean,
+      private frames: FrameCounts, private value: string) {
     
     this.checkboxes = [
       new CheckboxBinding("Sunday", saveObject, index, isNew),
@@ -37,6 +38,7 @@ export class HabbajetBinding {
       this.state = 0;
       this.saveData();
     } else {
+      this.value = saveObject.getString("h" + this.index + "value")
       this.name = saveObject.getString("h" + this.index + "name");
       this.state = saveObject.getNumber("h" + this.index + "stateIndex");
     }
@@ -111,7 +113,7 @@ export class HabbajetBinding {
   }
 
   endWeek(successes: number) {
-    this.budget.updateTotal(successes);
+    this.budget.updateTotal(successes, this.value);
     _.forEach(this.checkboxes, (c) => {
       c.reset();
     });
@@ -128,6 +130,7 @@ export class HabbajetBinding {
   }
 
   saveData() {
+    this.saveObject.setString("h" + this.index + "value", this.value);
     this.saveObject.setString("h" + this.index + "name", this.name);
     this.saveObject.setNumber("h" + this.index + "stateIndex", this.state);
   }
