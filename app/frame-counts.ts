@@ -8,13 +8,13 @@ export class FrameCounts {
     constructor() {
 
         this.tFrames = [
-            0,
+            10,
             19,
             14,
             10,
             12,
             9,
-            0,
+            6,
         ];
 
         this.iFrames = [
@@ -24,7 +24,7 @@ export class FrameCounts {
             6,
             7,
             5,
-            1,
+            7,
         ];
 
         this.aFrames = [

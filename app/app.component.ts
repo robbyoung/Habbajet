@@ -59,6 +59,8 @@ export class AppComponent {
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
     }
     this.habbajetCount = this.habbajetList.length + 1;
+    this.newHabbajetName = '';
+    this.newHabbajetValue = '';
   }
 
   selectHabbajet(index: number) {
@@ -66,6 +68,10 @@ export class AppComponent {
       this.habbajetIndex = index;
       this.habbajet = this.habbajetList[this.habbajetIndex];
     }
+  }
+
+  onNewHabbajetTap() {
+    this.habbajet = undefined;
   }
 
   onCheckboxTap(args) {

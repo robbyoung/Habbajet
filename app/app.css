@@ -22,6 +22,16 @@
     padding-left: 5;
 }
 
+.tabGrid {
+    margin: auto;
+    margin-top: 10;
+    width: 335;
+    font-size: 25;
+    background-color: #252525;
+    color: #ebebeb;
+    border-radius: 5;
+}
+
 .addButton {
     background-color: #252525;
     color: #ebebeb;
@@ -55,8 +65,21 @@ Image {
 }
 
 .tab {
-    background-color: #ebebeb;
+    color: #ebebeb;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.newHabbajetGrid {
+    margin: 20;
+    font-size: 20;
+}
+
+.textHeading {
+    padding-top: 10;
+    text-align: right;
 }
 
 .moneyBox {

@@ -147,9 +147,9 @@ export class HabbajetBinding {
     }
     this.transforming = false;
     const actionType = Math.random() * 2
-    if(actionType < 1) {
+    if(actionType < 1 && this.frames.exists(this.state, 0, 'a')) {
       this.action = 'a';
-    } else {
+    } else if(this.frames.exists(this.state, 0, 'b')) {
       this.action = 'b';
     }
     this.restartAnimation();
