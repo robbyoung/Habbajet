@@ -19,7 +19,7 @@ export class HabbajetBinding {
 
   constructor(private budget: BudgetBinding, private saveObject: any,
       private index: number, public name: string, isNew: boolean,
-      private frames: FrameCounts, private value: string) {
+      private frames: FrameCounts, public value: string) {
     
     this.checkboxes = [
       new CheckboxBinding("Sunday", saveObject, index, isNew),
@@ -162,5 +162,22 @@ export class HabbajetBinding {
 
   isBusy() {
     return this.acting || this.transforming;
+  }
+
+  update(newName: string, newValue: string) {
+    this.name = newName;
+    this.value = newValue;
+  }
+
+  updateIndex(newIndex: number) {
+    this.deleteData();
+    this.index = newIndex;
+    this.saveData();
+  }
+
+  deleteData() {
+    this.saveObject.remove("h" + this.index + "value");
+    this.saveObject.remove("h" + this.index + "name");
+    this.saveObject.remove("h" + this.index + "stateIndex");
   }
 }
