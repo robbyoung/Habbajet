@@ -1,7 +1,7 @@
 <ActionBar title="Habbajet" class="actionBar"></ActionBar>
 
 <StackLayout>
-    <GridLayout rows="40" columns="45,45,45,45,45,45,45" class="tabGrid">
+    <GridLayout rows="40" columns="38,38,38,38,38,38,38,*" class="tabGrid">
             <Label row="0" col="0" text="1" (tap)="selectHabbajet(0)" class="tab" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
             <Label row="0" col="1" text="2" (tap)="selectHabbajet(1)" class="tab" [visibility]="habbajetList[1] ? 'visible' : 'collapse'"></Label>
             <Label row="0" col="2" text="3" (tap)="selectHabbajet(2)" class="tab" [visibility]="habbajetList[2] ? 'visible' : 'collapse'"></Label>
@@ -9,15 +9,15 @@
             <Label row="0" col="4" text="5" (tap)="selectHabbajet(4)" class="tab" [visibility]="habbajetList[4] ? 'visible' : 'collapse'"></Label>
             <Label row="0" col="5" text="6" (tap)="selectHabbajet(5)" class="tab" [visibility]="habbajetList[5] ? 'visible' : 'collapse'"></Label>
             <Label row="0" col="6" text="+" (tap)="onNewHabbajetTap()" class="tab"></Label>
+            <Label row="0" col="7" text="EDIT" (tap)="onEditTap()" [visibility]="habbajet ? (editing ? 'collapse' : 'visible') : 'collapse'"></Label>
     </GridLayout>
 
     <GridLayout rows="auto,50,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid">
         <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture" (tap)="onImageTap()"></Image>
         
         <Label [text]="habbajet ? habbajet.name : ''" row="1" col="0" colspan="6" class="habbajetName" [visibility]="editing ? 'collapse' : 'visible'"></Label>
-        <Label [text]="habbajet ? habbajet.date : ''" row="2" col="0" colspan="5"  class="date" [visibility]="editing ? 'collapse' : 'visible'"></Label>
+        <Label [text]="habbajet ? habbajet.activeDay.title : ''" row="2" col="0" colspan="7"  class="date" [visibility]="editing ? 'collapse' : 'visible'"></Label>
         <Label row="1" col="4" colspan="3" [text]="budget.totalAmountString" (tap)="onPurchaseTap()" class="money" [visibility]="editing ? 'collapse' : 'visible'"></Label>
-        <Label row="2" col="5" colspan="2" text="EDIT" (tap)="onEditTap()" [visibility]="editing ? 'collapse' : 'visible'"></Label>
         <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="3" col="0" [visibility]="editing ? 'collapse' : 'visible'"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[1].image : undefined" row="3" col="1" [visibility]="editing ? 'collapse' : 'visible'"></Image>
         <Image [src]="habbajet ? habbajet.checkboxes[2].image : undefined" row="3" col="2" [visibility]="editing ? 'collapse' : 'visible'"></Image>

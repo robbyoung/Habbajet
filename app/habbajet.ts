@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
 import { BudgetBinding } from "./budget";
 import { FrameCounts } from "./frame-counts";
+import * as Moment from "moment";
 
 export class HabbajetBinding {
   private state: number;
@@ -22,14 +23,15 @@ export class HabbajetBinding {
       private frames: FrameCounts, public value: string) {
     
     this.checkboxes = [
-      new CheckboxBinding("Sunday", saveObject, index, isNew),
-      new CheckboxBinding("Monday", saveObject, index, isNew),
-      new CheckboxBinding("Tuesday", saveObject, index, isNew),
-      new CheckboxBinding("Wednesday", saveObject, index, isNew),
-      new CheckboxBinding("Thursday", saveObject, index, isNew),
-      new CheckboxBinding("Friday", saveObject, index, isNew),
-      new CheckboxBinding("Saturday", saveObject, index, isNew)
+      new CheckboxBinding(saveObject, index, isNew, 0),
+      new CheckboxBinding(saveObject, index, isNew, 1),
+      new CheckboxBinding(saveObject, index, isNew, 2),
+      new CheckboxBinding(saveObject, index, isNew, 3),
+      new CheckboxBinding(saveObject, index, isNew, 4),
+      new CheckboxBinding(saveObject, index, isNew, 5),
+      new CheckboxBinding(saveObject, index, isNew, 6)
     ];
+    this.setCheckboxTimes();
     this.acting = false;
     this. transforming = false;
     this.action = 'i';
@@ -173,11 +175,28 @@ export class HabbajetBinding {
     this.deleteData();
     this.index = newIndex;
     this.saveData();
+    this.changeCheckboxIndices();
   }
 
   deleteData() {
     this.saveObject.remove("h" + this.index + "value");
     this.saveObject.remove("h" + this.index + "name");
     this.saveObject.remove("h" + this.index + "stateIndex");
+  }
+
+  setCheckboxTimes() {
+    let today = Moment().startOf('week');
+    for (let i = 0; i < 7; i++) {
+      this.checkboxes[i].setTime(today.add(1, 'days').format('dddd Do MMM'), today.valueOf());
+      if(this.checkboxes[i].time < Moment().endOf('day').valueOf()) {
+        this.activeDay = this.checkboxes[i];
+      }
+    }
+  }
+
+  changeCheckboxIndices() {
+    for (let i = 0; i < 7; i++) {
+      this.checkboxes[i].changeIndex(this.index);
+    }
   }
 }

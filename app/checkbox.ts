@@ -8,13 +8,13 @@ export class CheckboxBinding {
     public state: CheckboxState;
     public image: string;
     public title: string;
+    public time: number;
 
-    constructor(title: string, private saveObject: any, private index: number, isNew: boolean) {
-        this.title = title;
+    constructor(private saveObject: any, private index: number, isNew: boolean, private weekday: number) {
         if(isNew) {
             this.state = CheckboxState.NEUTRAL;
         } else {
-            this.state = this.saveObject.getNumber(this.title + "" + this.index);
+            this.state = this.saveObject.getNumber(this.weekday + "" + this.index);
         }
         this.setImage();
     }
@@ -56,10 +56,26 @@ export class CheckboxBinding {
 
     reset() {
         this.state = CheckboxState.NEUTRAL;
+        this.saveData();
         this.setImage();
     }
 
     saveData() {
-        this.saveObject.setNumber(this.title + "" + this.index, this.state);
+        this.saveObject.setNumber(this.weekday + "" + this.index, this.state);
+    }
+
+    clearData() {
+        this.saveObject.remove(this.weekday + "" + this.index);
+    }
+
+    changeIndex(newIndex: number) {
+        this.clearData();
+        this.index = newIndex;
+        this.saveData();
+    }
+
+    setTime(title: string, time: number) {
+        this.title = title;
+        this.time = time;
     }
 }

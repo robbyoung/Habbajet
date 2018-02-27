@@ -6,7 +6,6 @@ import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
 import { TextField } from "ui/text-field";
 import { FrameCounts } from "./frame-counts";
-import * as Moment from "moment";
 
 @Component({
   selector: "my-app",
@@ -42,7 +41,6 @@ export class AppComponent {
   loadSavedData() {
     const totalValue = this.saveObject.getNumber("total");
     if(totalValue !== undefined) {
-      // this.date = Moment('26/02/2018', 'DD/MM/YY').format();
       this.budget.setTotal(totalValue);
       const habbajetCount = this.saveObject.getNumber("habbajetCount");
       for(let i = 0; i < habbajetCount; i++) {
@@ -63,10 +61,10 @@ export class AppComponent {
           this.habbajetIndex, this.newHabbajetName, true, this.frames, this.newHabbajetValue));
       this.habbajet = this.habbajetList[this.habbajetIndex];
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
+      this.habbajetCount = this.habbajetList.length + 1;
+      this.newHabbajetName = '';
+      this.newHabbajetValue = '';
     }
-    this.habbajetCount = this.habbajetList.length + 1;
-    this.newHabbajetName = '';
-    this.newHabbajetValue = '';
   }
 
   selectHabbajet(index: number) {
