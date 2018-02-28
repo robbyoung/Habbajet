@@ -40,8 +40,8 @@
     </GridLayout>
 
     <GridLayout rows="90" columns="45, 100, 50, 100, 45" class="responseGrid" [visibility]="habbajet ? 'visible' : 'collapse'">
-        <Image [src]="habbajet ? (habbajet.transforming ? '~/images/checkbox/InactiveCheck.png' : '~/images/checkbox/ActiveCheck.png') : ''" row="0" col="1" (tap)="check()" class="button"></Image>
-        <Image [src]="habbajet ? (habbajet.transforming ? '~/images/checkbox/InactiveCross.png' : '~/images/checkbox/ActiveCross.png') : ''" row="0" col="3" (tap)="cross()" class="button"></Image>
+        <Image [src]="habbajet ? (habbajet.locked ? '~/images/checkbox/InactiveCheck.png' : '~/images/checkbox/ActiveCheck.png') : ''" row="0" col="1" (tap)="check()" class="button"></Image>
+        <Image [src]="habbajet ? (habbajet.locked ? '~/images/checkbox/InactiveCross.png' : '~/images/checkbox/ActiveCross.png') : ''" row="0" col="3" (tap)="cross()" class="button"></Image>
     </GridLayout>
 
     <StackLayout [visibility]="habbajet ? 'collapse' : 'visible'" class="newHabbajetGrid">

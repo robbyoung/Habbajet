@@ -16,7 +16,7 @@ export class HabbajetBinding {
   public animationID: number;
 
   public transforming: boolean;
-  private acting: boolean;
+  public locked: boolean;
 
   constructor(private budget: BudgetBinding, private saveObject: any,
       private index: number, public name: string, isNew: boolean,
@@ -31,8 +31,7 @@ export class HabbajetBinding {
       new CheckboxBinding(saveObject, index, isNew, 5),
       new CheckboxBinding(saveObject, index, isNew, 6)
     ];
-    this.setCheckboxTimes();
-    this.acting = false;
+    
     this. transforming = false;
     this.action = 'i';
     this.frame = 0;
@@ -44,36 +43,32 @@ export class HabbajetBinding {
       this.name = saveObject.getString("h" + this.index + "name");
       this.state = saveObject.getNumber("h" + this.index + "stateIndex");
     }
-    this.setActiveDay();
     this.setState(this.state);
+    this.setCheckboxTimes(isNew);
   }
 
   dailyUpdate(success: boolean) {
-    if(!this.isBusy()) {
+    if(!this.activeDay.isSet()) {
       this.activeDay.fillCheckbox(success);
       this.checkboxStateUpdate();
+      this.locked = true;
       this.saveData();
     }
   }
 
   checkboxStateUpdate() {
     let newState = 0;
-    let numSetBoxes = 0;
     _.forEach(this.checkboxes, (c) => {
       if(c.isChecked()) {
         newState++;
       }
-      if(c.isSet()) {
-        numSetBoxes++;
-      }
     });
 
-    if(numSetBoxes > 6) {
+    if(this.activeDay.time === this.checkboxes[6].time) {
       this.endWeek(newState);
     } else {
       this.setState(newState);
     }
-    this.setActiveDay();
   }
 
   setImage() {
@@ -116,19 +111,7 @@ export class HabbajetBinding {
 
   endWeek(successes: number) {
     this.budget.updateTotal(successes, this.value);
-    _.forEach(this.checkboxes, (c) => {
-      c.reset();
-    });
     this.setState(0);
-  }
-
-  setActiveDay() {
-    for(let i = 0; i < this.checkboxes.length; i++) {
-      if (!this.checkboxes[i].isSet()) {
-        this.activeDay = this.checkboxes[i];
-        return;
-      }
-    }
   }
 
   saveData() {
@@ -158,12 +141,11 @@ export class HabbajetBinding {
   }
 
   resetBusiness() {
-    this.acting = false;
     this.transforming = false;
   }
 
   isBusy() {
-    return this.acting || this.transforming;
+    return this.transforming;
   }
 
   update(newName: string, newValue: string) {
@@ -184,14 +166,31 @@ export class HabbajetBinding {
     this.saveObject.remove("h" + this.index + "stateIndex");
   }
 
-  setCheckboxTimes() {
-    let today = Moment().startOf('week');
+  setCheckboxTimes(isNew: boolean) {
+    let today = Moment().startOf('week').subtract(1, 'days');
+    if(!isNew &&  this.checkboxes[6].time < today.valueOf()) {
+      if(!this.checkboxes[6].isSet()) {
+        let numChecked = 0;
+        _.forEach(this.checkboxes, (c) => {
+          if(c.isChecked()) {
+            numChecked++;
+          }
+        });
+        this.state = 0;
+        this.endWeek(numChecked);
+      }
+
+      _.forEach(this.checkboxes, (c) => {
+        c.reset();
+      });
+    }
     for (let i = 0; i < 7; i++) {
       this.checkboxes[i].setTime(today.add(1, 'days').format('dddd Do MMM'), today.valueOf());
       if(this.checkboxes[i].time < Moment().endOf('day').valueOf()) {
         this.activeDay = this.checkboxes[i];
       }
     }
+    this.locked = this.activeDay.isSet();
   }
 
   changeCheckboxIndices() {

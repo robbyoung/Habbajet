@@ -15,6 +15,7 @@ export class CheckboxBinding {
             this.state = CheckboxState.NEUTRAL;
         } else {
             this.state = this.saveObject.getNumber(this.weekday + "" + this.index);
+            this.time = this.saveObject.getNumber(this.weekday + "" + this.index + "t");
         }
         this.setImage();
     }
@@ -62,10 +63,14 @@ export class CheckboxBinding {
 
     saveData() {
         this.saveObject.setNumber(this.weekday + "" + this.index, this.state);
+        if(this.time !== undefined) {
+            this.saveObject.setNumber(this.weekday + "" + this.index + "t", this.time);
+        }
     }
 
     clearData() {
         this.saveObject.remove(this.weekday + "" + this.index);
+        this.saveObject.remove(this.weekday + "" + this.index + "t");
     }
 
     changeIndex(newIndex: number) {
@@ -77,5 +82,6 @@ export class CheckboxBinding {
     setTime(title: string, time: number) {
         this.title = title;
         this.time = time;
+        this.saveData();
     }
 }
