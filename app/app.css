@@ -114,6 +114,10 @@ Image {
     border-radius: 5;
 }
 
+.deleteButton {
+    text-align: center;
+}
+
 /* .checkboxList {
     margin: 10;
     padding: 5;

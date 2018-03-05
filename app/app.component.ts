@@ -24,7 +24,7 @@ export class AppComponent {
   public newHabbajetName: string;
   public newHabbajetValue: string;
   public date: string;
-  public tempHabbajet;
+  public columnWidths;
   public editing;
 
   constructor() {
@@ -52,6 +52,7 @@ export class AppComponent {
       }
     }
     this.habbajetCount = this.habbajetList.length + 1;
+    this.setColumnWidths();
   }
 
   newHabbajet() {
@@ -65,6 +66,7 @@ export class AppComponent {
       this.newHabbajetName = '';
       this.newHabbajetValue = '';
     }
+    this.setColumnWidths();
   }
 
   selectHabbajet(index: number) {
@@ -113,12 +115,13 @@ export class AppComponent {
   }
 
   isValidName(): boolean {
-    return this.newHabbajetName.length > 0;
+    return this.newHabbajetName.length > 0 &&
+     this.newHabbajetName.length < 15;
   }
 
   isValidValue(): boolean {
     const value = _.toNumber(this.newHabbajetValue);
-    return isFinite(value) && value > 0;
+    return isFinite(value) && value > 0 && value <= 1000;
   }
 
   nameChange(args) {
@@ -153,5 +156,18 @@ export class AppComponent {
     } else {
       this.habbajet = undefined;
     }
+    this.setColumnWidths();
+  }
+
+  setColumnWidths() {
+    switch(this.habbajetCount) {
+      case 2: this.columnWidths = '38,114,114,0,0,0,0,*'; break;
+      case 3: this.columnWidths = '38,76,76,76,0,0,0,*'; break;
+      case 4: this.columnWidths = '38,57,57,57,57,0,0,*'; break;
+      case 5: this.columnWidths = '38,45,45,45,46,46,0,*'; break;
+      case 6: this.columnWidths = '38,38,38,38,38,38,38,*'; break;
+      default: this.columnWidths = '38,228,0,0,0,0,0,*'; break;
+    }
+    console.log(this.habbajetCount + ' : ' + this.columnWidths);
   }
 }
