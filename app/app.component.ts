@@ -5,6 +5,8 @@ import { BudgetBinding } from "./budget";
 import * as _ from 'lodash';
 import * as Dialogs from 'ui/dialogs';
 import { TextField } from "ui/text-field";
+import {Page} from "ui/page";
+import frame = require("ui/frame");
 import { FrameCounts } from "./frame-counts";
 
 @Component({
@@ -51,7 +53,7 @@ export class AppComponent {
         this.habbajet = this.habbajetList[this.habbajetIndex];
       }
     }
-    this.habbajetCount = this.habbajetList.length + 1;
+    this.habbajetCount = this.habbajetList.length;
     this.setColumnWidths();
   }
 
@@ -60,24 +62,39 @@ export class AppComponent {
       this.habbajetIndex = this.habbajetList.length;
       this.habbajetList.push(new HabbajetBinding(this.budget, this.saveObject,
           this.habbajetIndex, this.newHabbajetName, true, this.frames, this.newHabbajetValue));
-      this.habbajet = this.habbajetList[this.habbajetIndex];
       this.saveObject.setNumber("habbajetCount", this.habbajetList.length);
-      this.habbajetCount = this.habbajetList.length + 1;
+      this.habbajetCount = this.habbajetList.length;
       this.newHabbajetName = '';
       this.newHabbajetValue = '';
+      this.selectHabbajet(this.habbajetIndex, true);
     }
     this.setColumnWidths();
   }
 
-  selectHabbajet(index: number) {
-    if (this.habbajetList.length > index) {
-      this.habbajetIndex = index;
-      this.habbajet = this.habbajetList[this.habbajetIndex];
+  selectHabbajet(index: number, force?: boolean) {
+    if (this.habbajetList.length > index && this.habbajetIndex !== index || force || !this.habbajet) {
+      const habbajetDisplay = <Page>frame.topmost().currentPage.getViewById("habbajetDisplay");
+      habbajetDisplay.animate({
+          opacity: 0,
+          duration: 200,
+      })
+      .then(() => {
+        this.habbajetIndex = index;
+        this.habbajet = this.habbajetList[this.habbajetIndex];
+      })
+      .then(() => {
+        habbajetDisplay.animate({
+          opacity: 1,
+          duration: 200,
+        });
+      })
     }
   }
 
   onNewHabbajetTap() {
-    this.habbajet = undefined;
+    if(this.habbajetCount < 6) {
+      this.habbajet = undefined;
+    }
   }
 
   onCheckboxTap(args) {
@@ -135,6 +152,7 @@ export class AppComponent {
   }
 
   onEditTap() {
+    if(_.isNil(this.habbajet)) return;
     this.editing = true;
     this.newHabbajetName = this.habbajet.name;
     this.newHabbajetValue = this.habbajet.value;
@@ -143,7 +161,9 @@ export class AppComponent {
   onDeleteTap() {
     this.editing = false;
     this.habbajet.deleteData();
-    this.habbajetList.splice(this.habbajetIndex);
+    this.habbajetList = _.filter(this.habbajetList, (h) => {
+      return h.index !== this.habbajetIndex;
+    });
     this.newHabbajetName = '';
     this.newHabbajetValue = '';
     this.habbajetCount--;
@@ -152,7 +172,7 @@ export class AppComponent {
     }
     this.habbajetIndex = 0;
     if(this.habbajetList.length > 0) {
-      this.habbajet = this.habbajetList[0];
+      this.selectHabbajet(0, true);
     } else {
       this.habbajet = undefined;
     }
@@ -168,6 +188,5 @@ export class AppComponent {
       case 6: this.columnWidths = '38,38,38,38,38,38,38,*'; break;
       default: this.columnWidths = '38,228,0,0,0,0,0,*'; break;
     }
-    console.log(this.habbajetCount + ' : ' + this.columnWidths);
   }
 }

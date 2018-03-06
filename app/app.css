@@ -71,6 +71,12 @@ Image {
     margin: 0;
     padding: 0;
     text-align: center;
+    border-left-width: 1px;
+    border-color: #ebebeb;
+}
+
+.selected {
+    background-color: #3a3a3a;
 }
 
 .newHabbajetGrid {
