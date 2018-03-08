@@ -2,29 +2,28 @@
 
 <StackLayout>
     <GridLayout rows="40" [columns]="columnWidths" class="tabGrid">
-            <Label row="0" col="0" text="+" (tap)="onNewHabbajetTap()" class="tab" [color]="habbajet || habbajetCount < 6 ? '#ebebeb' : '#000000'"></Label>
-            <Label row="0" col="1" [text]="habbajetList[0] ? habbajetList[0].name : ''" (tap)="selectHabbajet(0)" [class]="habbajet && habbajetIndex === 0 ? 'selected tab' : 'tab'" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="2" [text]="habbajetList[1] ? habbajetList[1].name : ''" (tap)="selectHabbajet(1)" [class]="habbajet && habbajetIndex === 1 ? 'selected tab' : 'tab'" [visibility]="habbajetList[1] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="3" [text]="habbajetList[2] ? habbajetList[2].name : ''" (tap)="selectHabbajet(2)" [class]="habbajet && habbajetIndex === 2 ? 'selected tab' : 'tab'" [visibility]="habbajetList[2] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="4" [text]="habbajetList[3] ? habbajetList[3].name : ''" (tap)="selectHabbajet(3)" [class]="habbajet && habbajetIndex === 3 ? 'selected tab' : 'tab'" [visibility]="habbajetList[3] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="5" [text]="habbajetList[4] ? habbajetList[4].name : ''" (tap)="selectHabbajet(4)" [class]="habbajet && habbajetIndex === 4 ? 'selected tab' : 'tab'" [visibility]="habbajetList[4] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="6" [text]="habbajetList[5] ? habbajetList[5].name : ''" (tap)="selectHabbajet(5)" [class]="habbajet && habbajetIndex === 5 ? 'selected tab' : 'tab'" [visibility]="habbajetList[5] ? 'visible' : 'collapse'"></Label>
-            <Label row="0" col="7" text="Edit" class="tab" (tap)="onEditTap()" [color]="habbajet ? (editing ? '#000000' : '#ebebeb') : '#000000'"></Label>
+        <Label row="0" col="0" text="+" (tap)="onNewHabbajetTap()" [class]="habbajet ? 'tab' : 'selected tab curvedLeft'" [color]="habbajetCount < 6 ? '#ebebeb' : '#000000'"></Label>
+        <Label row="0" col="1" [text]="habbajetList[0] ? habbajetList[0].tabName : ''" (tap)="selectHabbajet(0)" [class]="habbajet && habbajetIndex === 0 ? 'selected tab' : 'tab'" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="2" [text]="habbajetList[1] ? habbajetList[1].tabName : ''" (tap)="selectHabbajet(1)" [class]="habbajet && habbajetIndex === 1 ? 'selected tab' : 'tab'" [visibility]="habbajetList[1] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="3" [text]="habbajetList[2] ? habbajetList[2].tabName : ''" (tap)="selectHabbajet(2)" [class]="habbajet && habbajetIndex === 2 ? 'selected tab' : 'tab'" [visibility]="habbajetList[2] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="4" [text]="habbajetList[3] ? habbajetList[3].tabName : ''" (tap)="selectHabbajet(3)" [class]="habbajet && habbajetIndex === 3 ? 'selected tab' : 'tab'" [visibility]="habbajetList[3] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="5" [text]="habbajetList[4] ? habbajetList[4].tabName : ''" (tap)="selectHabbajet(4)" [class]="habbajet && habbajetIndex === 4 ? 'selected tab' : 'tab'" [visibility]="habbajetList[4] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="6" [text]="habbajetList[5] ? habbajetList[5].tabName : ''" (tap)="selectHabbajet(5)" [class]="habbajet && habbajetIndex === 5 ? 'selected tab' : 'tab'" [visibility]="habbajetList[5] ? 'visible' : 'collapse'"></Label>
     </GridLayout>
 
-    <GridLayout rows="auto,50,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid" id="habbajetDisplay">
-        <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture" (tap)="onImageTap()"></Image>
+    <GridLayout rows="auto,50,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid" id="habbajetDisplay" (swipe)="onSwipe($event)">
+        <Image [src]="habbajet ? habbajet.image : undefined" row="0" col="0" colspan="7" className="bigPicture" (tap)="onImageTap()" (swipe)="onSwipe($event)"></Image>
         
         <Label [text]="habbajet ? habbajet.name : ''" row="1" col="0" colspan="6" class="habbajetName" [visibility]="editing ? 'collapse' : 'visible'"></Label>
         <Label [text]="habbajet ? habbajet.activeDay.title : ''" row="2" col="0" colspan="7"  class="date" [visibility]="editing ? 'collapse' : 'visible'"></Label>
         <Label row="1" col="4" colspan="3" [text]="budget.totalAmountString" (tap)="onPurchaseTap()" class="money" [visibility]="editing ? 'collapse' : 'visible'"></Label>
-        <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="3" col="0" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[1].image : undefined" row="3" col="1" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[2].image : undefined" row="3" col="2" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[3].image : undefined" row="3" col="3" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[4].image : undefined" row="3" col="4" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[5].image : undefined" row="3" col="5" [visibility]="editing ? 'collapse' : 'visible'"></Image>
-        <Image [src]="habbajet ? habbajet.checkboxes[6].image : undefined" row="3" col="6" [visibility]="editing ? 'collapse' : 'visible'"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[0].image : undefined" row="3" col="0" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(0)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[1].image : undefined" row="3" col="1" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(1)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[2].image : undefined" row="3" col="2" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(2)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[3].image : undefined" row="3" col="3" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(3)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[4].image : undefined" row="3" col="4" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(4)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[5].image : undefined" row="3" col="5" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(5)"></Image>
+        <Image [src]="habbajet ? habbajet.checkboxes[6].image : undefined" row="3" col="6" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(6)"></Image>
         
         <StackLayout row="1" col="0" rowSpan="3" colSpan="7" [visibility]="editing ? 'visible' : 'collapse'">
             <GridLayout rows="50" columns="100, *">
@@ -45,13 +44,18 @@
     </GridLayout>
 
     <StackLayout [visibility]="habbajet ? 'collapse' : 'visible'" class="newHabbajetGrid">
-        <GridLayout rows="50" columns="65, *">
+        <GridLayout rows="50, 50, 50, 50" columns="80, *">
             <Label row="0" col="0" text="Name: " class="textHeading"></Label>
             <TextField row="0" col="1" [text]="newHabbajetName" (textChange)="nameChange($event)" id="nameField"></TextField>
-        </GridLayout>
-        <GridLayout rows="50" columns="65, *">
-            <Label row="0" col="0" text="Value: " class="textHeading"></Label>
-            <TextField row="0" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)" id="nameField"></TextField>
+
+            <Label row="1" col="0" text="Value: " class="textHeading"></Label>
+            <TextField row="1" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)" id="nameField"></TextField>
+
+            <Label row="2" col="0" text="Factor: " class="textHeading"></Label>
+            <TextField row="2" col="1" [text]="newHabbajetFactor" (textChange)="factorChange($event)" id="nameField"></TextField>
+
+            <Label row="3" col="0" text="Slack: " class="textHeading"></Label>
+            <TextField row="3" col="1" [text]="newHabbajetSlack" (textChange)="slackChange($event)" id="nameField"></TextField>
         </GridLayout>
         <Label text="Create New Habbajet" (tap)="newHabbajet()" class="addButton"></Label>
     </StackLayout>

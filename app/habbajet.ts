@@ -14,13 +14,14 @@ export class HabbajetBinding {
   public activeDay: CheckboxBinding;
   public animating: boolean;
   public animationID: number;
+  public tabName: string;
 
   public transforming: boolean;
   public locked: boolean;
 
   constructor(private budget: BudgetBinding, private saveObject: any,
       private index: number, public name: string, isNew: boolean,
-      private frames: FrameCounts, public value: string) {
+      private frames: FrameCounts, public value: string, private factor: number, private slack: number) {
     
     this.checkboxes = [
       new CheckboxBinding(saveObject, index, isNew, 0),
@@ -42,6 +43,8 @@ export class HabbajetBinding {
       this.value = saveObject.getString("h" + this.index + "value")
       this.name = saveObject.getString("h" + this.index + "name");
       this.state = saveObject.getNumber("h" + this.index + "stateIndex");
+      this.factor = saveObject.getNumber("h" + this.index + "factor");
+      this.slack = saveObject.getNumber("h" + this.index + "slack");
     }
     this.setState(this.state);
     this.setCheckboxTimes(isNew);
@@ -110,7 +113,7 @@ export class HabbajetBinding {
   }
 
   endWeek(successes: number) {
-    this.budget.updateTotal(successes, this.value);
+    this.budget.updateTotal(successes, this.value, this.factor, this.slack);
     this.setState(0);
   }
 
@@ -118,6 +121,8 @@ export class HabbajetBinding {
     this.saveObject.setString("h" + this.index + "value", this.value);
     this.saveObject.setString("h" + this.index + "name", this.name);
     this.saveObject.setNumber("h" + this.index + "stateIndex", this.state);
+    this.saveObject.setNumber("h" + this.index + "factor", this.factor);
+    this.saveObject.setNumber("h" + this.index + "slack", this.slack);
   }
 
   transform() {
@@ -164,6 +169,8 @@ export class HabbajetBinding {
     this.saveObject.remove("h" + this.index + "value");
     this.saveObject.remove("h" + this.index + "name");
     this.saveObject.remove("h" + this.index + "stateIndex");
+    this.saveObject.remove("h" + this.index + "factor");
+    this.saveObject.remove("h" + this.index + "slack");
   }
 
   setCheckboxTimes(isNew: boolean) {
@@ -197,5 +204,18 @@ export class HabbajetBinding {
     for (let i = 0; i < 7; i++) {
       this.checkboxes[i].changeIndex(this.index);
     }
+  }
+
+  updateTabText(maxChars: 0) {
+    if(this.name.length > maxChars) {
+      this.tabName = this.name.substring(0, maxChars);
+    } else {
+      this.tabName = this.name;
+    }
+  }
+
+  switchDay(index: number) {
+    this.activeDay = this.checkboxes[index];
+    this.locked = this.activeDay.isSet();
   }
 }

@@ -163,3 +163,13 @@ Image {
     color: black;
     text-align: center;
 }
+
+.curvedRight {
+    border-bottom-right-radius: 5;
+    border-bottom-left-radius: 5;
+}
+
+.curvedLeft {
+    border-bottom-left-radius: 5;
+    border-top-left-radius: 5;
+}

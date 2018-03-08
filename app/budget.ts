@@ -16,14 +16,14 @@ export class BudgetBinding {
         this.saveObject.setNumber("total", this.totalAmount);
     }
 
-    updateTotal(successes: number, value: string) {
-        if(successes === 0) {
+    updateTotal(successes: number, value: string, factor: number, slack: number) {
+        if(successes + slack === 0) {
             return;
         }
         let weeklyMax = _.toNumber(value);
         let weeklyIncome = weeklyMax;
-        for(let failures = 0; failures + successes < 7; failures++) {
-            weeklyIncome /= 2;
+        for(let failures = slack; failures + successes < 7; failures++) {
+            weeklyIncome /= factor;
         }
 
         this.totalAmount += weeklyIncome;
