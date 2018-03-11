@@ -8,6 +8,8 @@ import { TextField } from "ui/text-field";
 import {Page} from "ui/page";
 import frame = require("ui/frame");
 import { FrameCounts } from "./frame-counts";
+import { DialogBox } from "./dialogbox";
+import { ModalDialogOptions } from "nativescript-angular/directives/dialogs";
 
 @Component({
   selector: "my-app",

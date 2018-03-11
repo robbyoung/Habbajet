@@ -49,6 +49,6 @@ export class BudgetBinding {
     }
 
     verifyPurchase(amount: any): boolean {
-        return isFinite(amount) && amount > 0 && amount < this.totalAmount;
+        return isFinite(amount) && amount > 0 && amount <= this.totalAmount;
     }
 }

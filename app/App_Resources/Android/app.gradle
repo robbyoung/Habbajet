@@ -8,7 +8,7 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "org.nativescript.Habbajet" 
+    applicationId = "org.nativescript.HabbajetDev" 
     
     //override supported platforms
     // ndk {
