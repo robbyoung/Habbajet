@@ -20,10 +20,10 @@ export class FrameCounts {
         this.iFrames = [
             10,
             9,
-            6,
+            8,
             6,
             7,
-            5,
+            6,
             7,
         ];
 
@@ -33,7 +33,7 @@ export class FrameCounts {
             7,
             6,
             9,
-            0,
+            11,
             0,
         ];
 
