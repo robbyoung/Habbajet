@@ -100,6 +100,7 @@ export class AppComponent {
   onNewHabbajetTap() {
     if(this.habbajetCount < 6) {
       this.habbajet = undefined;
+      this.habbajetIndex = -1;
     }
   }
 
@@ -192,9 +193,9 @@ export class AppComponent {
     let maxChars: number;
     switch(this.habbajetCount) {
       case 2: maxChars = 5; break;
-      case 3: maxChars = 3; break;
-      case 4: maxChars = 2; break;
-      case 5: maxChars = 1; break;
+      case 3: maxChars = 4; break;
+      case 4: maxChars = 3; break;
+      case 5: maxChars = 2; break;
       case 6: maxChars = 1; break;
       default: maxChars = 10; break;
     }

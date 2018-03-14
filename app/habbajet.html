@@ -3,12 +3,12 @@
 <StackLayout>
     <GridLayout rows="40" [columns]="columnWidths" class="tabGrid">
         <Label row="0" col="0" text="+" (tap)="onNewHabbajetTap()" [class]="habbajet ? 'tab' : 'selected tab curvedLeft'" [color]="habbajetCount < 6 ? '#ebebeb' : '#000000'"></Label>
-        <Label row="0" col="1" [text]="habbajetList[0] ? habbajetList[0].tabName : ''" (tap)="selectHabbajet(0)" [class]="habbajet && habbajetIndex === 0 ? 'selected tab' : 'tab'" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
-        <Label row="0" col="2" [text]="habbajetList[1] ? habbajetList[1].tabName : ''" (tap)="selectHabbajet(1)" [class]="habbajet && habbajetIndex === 1 ? 'selected tab' : 'tab'" [visibility]="habbajetList[1] ? 'visible' : 'collapse'"></Label>
-        <Label row="0" col="3" [text]="habbajetList[2] ? habbajetList[2].tabName : ''" (tap)="selectHabbajet(2)" [class]="habbajet && habbajetIndex === 2 ? 'selected tab' : 'tab'" [visibility]="habbajetList[2] ? 'visible' : 'collapse'"></Label>
-        <Label row="0" col="4" [text]="habbajetList[3] ? habbajetList[3].tabName : ''" (tap)="selectHabbajet(3)" [class]="habbajet && habbajetIndex === 3 ? 'selected tab' : 'tab'" [visibility]="habbajetList[3] ? 'visible' : 'collapse'"></Label>
-        <Label row="0" col="5" [text]="habbajetList[4] ? habbajetList[4].tabName : ''" (tap)="selectHabbajet(4)" [class]="habbajet && habbajetIndex === 4 ? 'selected tab' : 'tab'" [visibility]="habbajetList[4] ? 'visible' : 'collapse'"></Label>
-        <Label row="0" col="6" [text]="habbajetList[5] ? habbajetList[5].tabName : ''" (tap)="selectHabbajet(5)" [class]="habbajet && habbajetIndex === 5 ? 'selected tab' : 'tab'" [visibility]="habbajetList[5] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="1" [text]="habbajetList[0] ? habbajetList[0].tabName : ''" (tap)="selectHabbajet(0)" [class]="habbajetIndex === 0 ? (habbajetCount === 1 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="2" [text]="habbajetList[1] ? habbajetList[1].tabName : ''" (tap)="selectHabbajet(1)" [class]="habbajetIndex === 1 ? (habbajetCount === 2 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[1] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="3" [text]="habbajetList[2] ? habbajetList[2].tabName : ''" (tap)="selectHabbajet(2)" [class]="habbajetIndex === 2 ? (habbajetCount === 3 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[2] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="4" [text]="habbajetList[3] ? habbajetList[3].tabName : ''" (tap)="selectHabbajet(3)" [class]="habbajetIndex === 3 ? (habbajetCount === 4 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[3] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="5" [text]="habbajetList[4] ? habbajetList[4].tabName : ''" (tap)="selectHabbajet(4)" [class]="habbajetIndex === 4 ? (habbajetCount === 5 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[4] ? 'visible' : 'collapse'"></Label>
+        <Label row="0" col="6" [text]="habbajetList[5] ? habbajetList[5].tabName : ''" (tap)="selectHabbajet(5)" [class]="habbajetIndex === 5 ? (habbajetCount === 6 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[5] ? 'visible' : 'collapse'"></Label>
     </GridLayout>
 
     <GridLayout rows="auto,50,40,40" columns="45,45,45,45,45,45,45" [visibility]="habbajet ? 'visible' : 'collapse'" class="checkboxGrid" id="habbajetDisplay" (swipe)="onSwipe($event)">

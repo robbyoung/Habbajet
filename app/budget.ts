@@ -26,6 +26,10 @@ export class BudgetBinding {
             weeklyIncome /= factor;
         }
 
+        if (this.totalAmount < 0) {
+            weeklyIncome *= 0.9;
+        }
+
         this.totalAmount += weeklyIncome;
         this.setTotalAmountString();
     }
@@ -49,6 +53,6 @@ export class BudgetBinding {
     }
 
     verifyPurchase(amount: any): boolean {
-        return isFinite(amount) && amount > 0 && amount <= this.totalAmount;
+        return isFinite(amount) && amount > 0;
     }
 }
