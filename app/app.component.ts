@@ -38,7 +38,7 @@ export class AppComponent {
     this.saveObject = require("application-settings");
     this.budget = new BudgetBinding(this.saveObject);
     this.frames = new FrameCounts();
-    this.habbajetList =[];
+    this.habbajetList = [];
     this.editing = false;
     this.newHabbajetName="";
     this.newHabbajetValue="";
@@ -94,6 +94,8 @@ export class AppComponent {
           duration: 200,
         });
       })
+    } else if(index === -1) {
+      this.onNewHabbajetTap();
     }
   }
 
@@ -205,47 +207,71 @@ export class AppComponent {
   }
 
   newFieldsValid(): boolean {
-    return this.isValidName() && this.isValidValue() && this.isValidFactor() && this.isValidSlack();
+    const name = this.isValidName();
+    const value = this.isValidValue();
+    const factor = this.isValidFactor();
+    const slack = this.isValidSlack();
+    return name && value && factor && slack;
   }
 
   isValidName(): boolean {
-    return this.newHabbajetName.length > 0 &&
+    const valid = this.newHabbajetName.length > 0 &&
      this.newHabbajetName.length < 15;
+     if(!valid) {
+      (<Page>frame.topmost().currentPage).getViewById("nameField").setInlineStyle('color: red');
+    }
+    return valid;
   }
 
   isValidValue(): boolean {
     const value = _.toNumber(this.newHabbajetValue);
-    return isFinite(value) && value > 0 && value <= 1000;
+    const valid = isFinite(value) && value > 0 && value <= 1000;
+    if(!valid) {
+      (<Page>frame.topmost().currentPage).getViewById("valueField").setInlineStyle('color: red');
+    }
+    return valid;
   }
 
   isValidFactor(): boolean {
     const value = _.toNumber(this.newHabbajetFactor);
-    return isFinite(value) && value > 1 && value <= 100;
+    const valid = isFinite(value) && value > 1 && value <= 100;
+    if(!valid) {
+      (<Page>frame.topmost().currentPage).getViewById("factorField").setInlineStyle('color: red');
+    }
+    return valid;
   }
 
   isValidSlack(): boolean {
     const value = _.toNumber(this.newHabbajetSlack);
-    return isFinite(value) && value >= 0 && value <= 6;
+    const valid = isFinite(value) && value >= 0 && value <= 6;
+    if(!valid) {
+      (<Page>frame.topmost().currentPage).getViewById("slackField").setInlineStyle('color: red');
+    }
+    return valid;
   }
 
   nameChange(args) {
     let textField = <TextField>args.object;
     this.newHabbajetName = textField.text;
+    (<Page>frame.topmost().currentPage).getViewById("nameField").setInlineStyle('color: black');
   }
 
   valueChange(args) {
     let textField = <TextField>args.object;
     this.newHabbajetValue = textField.text;
+    (<Page>frame.topmost().currentPage).getViewById("valueField").setInlineStyle('color: black');
   }
 
   factorChange(args) {
     let textField = <TextField>args.object;
     this.newHabbajetFactor = textField.text;
+    (<Page>frame.topmost().currentPage).getViewById("factorField").setInlineStyle('color: black');
   }
 
   slackChange(args) {
     let textField = <TextField>args.object;
     this.newHabbajetSlack = textField.text;
+    (<Page>frame.topmost().currentPage).getViewById("slackField").setInlineStyle('color: black');
   }
 
   resetNewVariables() {

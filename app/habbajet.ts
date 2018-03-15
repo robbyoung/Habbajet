@@ -216,6 +216,6 @@ export class HabbajetBinding {
 
   switchDay(index: number) {
     this.activeDay = this.checkboxes[index];
-    this.locked = this.activeDay.isSet();
+    this.locked = this.activeDay.isSet() || this.checkboxes[6].isSet();
   }
 }

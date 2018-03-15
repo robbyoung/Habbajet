@@ -26,14 +26,14 @@
         <Image [src]="habbajet ? habbajet.checkboxes[6].image : undefined" row="3" col="6" [visibility]="editing ? 'collapse' : 'visible'" (longPress)="habbajet.switchDay(6)"></Image>
         
         <StackLayout row="1" col="0" rowSpan="3" colSpan="7" [visibility]="editing ? 'visible' : 'collapse'">
-            <GridLayout rows="50" columns="100, *">
+            <!-- <GridLayout rows="50" columns="100, *">
                 <Label row="0" col="0" text="Name: " class="textHeading"></Label>
-                <TextField row="0" col="1" [text]="newHabbajetName" (textChange)="nameChange($event)" id="nameField"></TextField>
+                <TextField row="0" col="1" [text]="newHabbajetName" (textChange)="nameChange($event)"></TextField>
             </GridLayout>
             <GridLayout rows="50" columns="100, *">
                 <Label row="0" col="0" text="Value: " class="textHeading"></Label>
-                <TextField row="0" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)" id="nameField"></TextField>
-            </GridLayout>
+                <TextField row="0" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)"></TextField>
+            </GridLayout> -->
             <Label text="Delete" (tap)="onDeleteTap()" class="deleteButton"></Label>
         </StackLayout>
     </GridLayout>
@@ -49,13 +49,13 @@
             <TextField row="0" col="1" [text]="newHabbajetName" (textChange)="nameChange($event)" id="nameField"></TextField>
 
             <Label row="1" col="0" text="Value: " class="textHeading"></Label>
-            <TextField row="1" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)" id="nameField"></TextField>
+            <TextField row="1" col="1" [text]="newHabbajetValue" (textChange)="valueChange($event)" id="valueField"></TextField>
 
             <Label row="2" col="0" text="Factor: " class="textHeading"></Label>
-            <TextField row="2" col="1" [text]="newHabbajetFactor" (textChange)="factorChange($event)" id="nameField"></TextField>
+            <TextField row="2" col="1" [text]="newHabbajetFactor" (textChange)="factorChange($event)" id="factorField"></TextField>
 
             <Label row="3" col="0" text="Slack: " class="textHeading"></Label>
-            <TextField row="3" col="1" [text]="newHabbajetSlack" (textChange)="slackChange($event)" id="nameField"></TextField>
+            <TextField row="3" col="1" [text]="newHabbajetSlack" (textChange)="slackChange($event)" id="slackField"></TextField>
         </GridLayout>
         <Label text="Create New Habbajet" (tap)="newHabbajet()" class="addButton"></Label>
     </StackLayout>

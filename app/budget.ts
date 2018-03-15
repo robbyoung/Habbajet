@@ -7,12 +7,21 @@ export class BudgetBinding {
     public totalAmountString: string;
 
     constructor(private saveObject: any) {
-        this.totalAmount = 0
+        const totalAmount = this.saveObject.getNumber("total");
+        if (totalAmount !== undefined) {
+            this.totalAmount = 0;
+        } else {
+            this.totalAmount = totalAmount;
+        }
         this.setTotalAmountString();
     }
 
     setTotalAmountString() {
-        this.totalAmountString = '$' + this.totalAmount.toFixed(2);
+        if (this.totalAmount < 0) {
+            this.totalAmountString = '-$' + (this.totalAmount * -1).toFixed(2);
+        } else {
+            this.totalAmountString = '$' + this.totalAmount.toFixed(2);
+        }
         this.saveObject.setNumber("total", this.totalAmount);
     }
 
