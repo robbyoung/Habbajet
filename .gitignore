@@ -1,5 +1,4 @@
-tsconfig.json
-package.json
 hooks/
 node_modules/
 platforms/
+piskel/

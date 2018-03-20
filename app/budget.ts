@@ -8,7 +8,7 @@ export class BudgetBinding {
 
     constructor(private saveObject: any) {
         const totalAmount = this.saveObject.getNumber("total");
-        if (totalAmount !== undefined) {
+        if (totalAmount === undefined) {
             this.totalAmount = 0;
         } else {
             this.totalAmount = totalAmount;

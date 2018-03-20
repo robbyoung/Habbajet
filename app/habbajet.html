@@ -1,6 +1,6 @@
 <ActionBar title="Habbajet" class="actionBar"></ActionBar>
 
-<StackLayout>
+<StackLayout class="everything">
     <GridLayout rows="40" [columns]="columnWidths" class="tabGrid">
         <Label row="0" col="0" text="+" (tap)="onNewHabbajetTap()" [class]="habbajet ? 'tab' : 'selected tab curvedLeft'" [color]="habbajetCount < 6 ? '#ebebeb' : '#000000'"></Label>
         <Label row="0" col="1" [text]="habbajetList[0] ? habbajetList[0].tabName : ''" (tap)="selectHabbajet(0)" [class]="habbajetIndex === 0 ? (habbajetCount === 1 ? 'selected tab curvedRight' : 'selected tab') : 'tab'" [visibility]="habbajetList[0] ? 'visible' : 'collapse'"></Label>
