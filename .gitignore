@@ -2,3 +2,4 @@ hooks/
 node_modules/
 platforms/
 piskel/
+*.sh~
