@@ -1,61 +1,30 @@
-export class FrameCounts {
-
-    public iFrames: number[];
-    public tFrames: number[];
-    public aFrames: number[];
-    public bFrames: number[];
-
-    constructor() {
-
-        this.tFrames = [
-            10,
-            19,
-            14,
-            10,
-            12,
-            9,
-            6,
-        ];
-
-        this.iFrames = [
-            10,
-            9,
-            8,
-            6,
-            7,
-            6,
-            7,
-        ];
-
-        this.aFrames = [
-            14,
-            13,
-            7,
-            6,
-            9,
-            11,
-            0,
-        ];
-
-        this.bFrames = [
-            18,
-            11,
-            6,
-            9,
-            7,
-            0,
-            0,
-        ];
-    }
-
-    exists(state: number, frame: number, action: string): boolean {
-        if(frame < 0) return false;
-        switch(action) {
-            case('t'): return this.tFrames[state] > frame;
-            case('i'): return this.iFrames[state] > frame;
-            case('a'): return this.aFrames[state] > frame;
-            case('b'): return this.bFrames[state] > frame;
-            default: return false;
-        }
-    }
+export function frameCounts(state: string): number {
+  switch(state) {
+    case 'a0': return 14;
+    case 'a1': return 13;
+    case 'a2': return 7;
+    case 'a3': return 6;
+    case 'a4': return 9;
+    case 'a5': return 11;
+    case 'b0': return 6;
+    case 'b1': return 11;
+    case 'b2': return 6;
+    case 'b3': return 3;
+    case 'b4': return 7;
+    case 'i0': return 3;
+    case 'i1': return 9;
+    case 'i2': return 8;
+    case 'i3': return 6;
+    case 'i4': return 7;
+    case 'i5': return 6;
+    case 'i6': return 7;
+    case 't0': return 3;
+    case 't1': return 6;
+    case 't2': return 14;
+    case 't3': return 10;
+    case 't4': return 12;
+    case 't5': return 9;
+    case 't6': return 6;
+    default: return 0;
+  }
 }
