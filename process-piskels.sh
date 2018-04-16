@@ -1,6 +1,6 @@
 #! /bin/bash
 
-rm app/images/*
+rm app/images/habbajets/*
 
 echo "export function frameCounts(state: string): number {" > app/frame-counts.ts
 echo "  switch(state) {" >> app/frame-counts.ts
@@ -19,7 +19,7 @@ for f in $files; do
     width=$(magick identify -format '%w' output.png)
     width=$(($width/300))
     
-    magick output.png -crop "${width}x1+0+0@" +repage +adjoin "app/images/$filename.png"
+    magick output.png -crop "${width}x1+0+0@" +repage +adjoin "app/images/habbajets/$filename.png"
     rm output.png
     echo "    case '$filename': return $width;" >> app/frame-counts.ts 
 done

@@ -1,5 +1,4 @@
-# NativeScript Tutorial Angular Template
+# Habbajet
 
-This repo serves as the starting point for NativeScript’s [Angular Getting Started Guide](https://docs.nativescript.org/angular/tutorial/ng-chapter-0).
-
-Please file any issues with this template on the [NativeScript/docs repository](https://github.com/nativescript/docs), which is where the tutorial content lives.
+This app is meant to help users with habit tracking through self-imposed financial incentives, with some slight gamification.
+Users raise Habbajets, small blob-like creatures with a strange symbiotic relationship with the human drive to better themselves.
