@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit, Injectable, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
 
 @Component({
@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 export class HabbajetTabComponent {
     public name: string;
     
-    onInit() {
+    constructor() {
         this.name = 'Soupboy';
     }
 }

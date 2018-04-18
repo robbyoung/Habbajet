@@ -1,4 +1,16 @@
 <StackLayout>
-    <habbajet-tab></habbajet-tab>
-    <habbajet-tab></habbajet-tab>
+    <TabView androidTabsPosition="bottom" id='tabView'>
+        <StackLayout *tabItem="{title: 'Budget'}">
+            <budget-tab></budget-tab>
+        </StackLayout>
+        <StackLayout *tabItem="{title: 'One'}">
+            <habbajet-tab></habbajet-tab>
+        </StackLayout>
+        <StackLayout *tabItem="{title: 'Two'}">
+            <habbajet-tab></habbajet-tab>
+        </StackLayout>
+        <StackLayout *tabItem="{title: 'Add'}">
+            <add-tab></add-tab>
+        </StackLayout>
+    </TabView>
 </StackLayout>
