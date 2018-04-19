@@ -3,13 +3,13 @@ import * as _ from 'lodash';
 
 @Component({
     selector: "habbajet-tab",
-    templateUrl: "views/habbajet-tab/habbajet-tab.html",
+    templateUrl: "views/habbajet-tab-view/habbajet-tab/habbajet-tab.html",
 })
 
-export class HabbajetTabComponent {
+export class HabbajetImageComponent {
     public name: string;
     
     constructor() {
-        this.name = 'Soupboy';
+        
     }
 }

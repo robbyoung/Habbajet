@@ -3,9 +3,9 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { AppComponent } from "./app.component";
 import { HabbajetTabViewComponent } from "./views/habbajet-tab-view/habbajet-tab-view.component";
-import { HabbajetTabComponent } from "./views/habbajet-tab/habbajet-tab.component";
-import { BudgetTabComponent } from "./views/budget-tab/budget-tab.component";
-import { AddTabComponent } from "./views/add-tab/add-tab.component";
+import { HabbajetTabComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-tab.component";
+import { BudgetTabComponent } from "./views/habbajet-tab-view/budget-tab/budget-tab.component";
+import { AddTabComponent } from "./views/habbajet-tab-view/add-tab/add-tab.component";
 
 @NgModule({
   declarations: [

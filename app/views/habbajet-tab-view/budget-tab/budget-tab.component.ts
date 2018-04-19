@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 @Component({
     selector: "budget-tab",
-    templateUrl: "views/budget-tab/budget-tab.html",
+    templateUrl: "views/habbajet-tab-view/budget-tab/budget-tab.html",
 })
 
 export class BudgetTabComponent {
