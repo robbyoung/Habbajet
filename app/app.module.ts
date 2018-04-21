@@ -6,6 +6,10 @@ import { HabbajetTabViewComponent } from "./views/habbajet-tab-view/habbajet-tab
 import { HabbajetTabComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-tab.component";
 import { BudgetTabComponent } from "./views/habbajet-tab-view/budget-tab/budget-tab.component";
 import { AddTabComponent } from "./views/habbajet-tab-view/add-tab/add-tab.component";
+import { HabbajetImageComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-image/habbajet-image.component";
+import { HabbajetInfoComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-info/habbajet-info.component";
+import { HabbajetButtonsComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-buttons/habbajet-buttons.component";
+import { HabbajetCheckboxComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-checkbox/habbajet-checkbox.component";
 
 @NgModule({
   declarations: [
@@ -13,7 +17,11 @@ import { AddTabComponent } from "./views/habbajet-tab-view/add-tab/add-tab.compo
     HabbajetTabViewComponent,
     HabbajetTabComponent,
     BudgetTabComponent,
-    AddTabComponent
+    AddTabComponent,
+    HabbajetImageComponent,
+    HabbajetInfoComponent,
+    HabbajetButtonsComponent,
+    HabbajetCheckboxComponent
   ],
   bootstrap: [AppComponent],
   imports: [NativeScriptModule],
