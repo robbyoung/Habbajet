@@ -10,6 +10,8 @@ import { HabbajetImageComponent } from "./views/habbajet-tab-view/habbajet-tab/h
 import { HabbajetInfoComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-info/habbajet-info.component";
 import { HabbajetButtonsComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-buttons/habbajet-buttons.component";
 import { HabbajetCheckboxComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-checkbox/habbajet-checkbox.component";
+import { ImageService } from "./services/images.service";
+import { HabbajetService } from "./services/habbajet.service";
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { HabbajetCheckboxComponent } from "./views/habbajet-tab-view/habbajet-ta
     HabbajetButtonsComponent,
     HabbajetCheckboxComponent
   ],
+  providers: [
+    HabbajetService,
+    ImageService,
+  ],
   bootstrap: [AppComponent],
   imports: [NativeScriptModule],
   schemas: [NO_ERRORS_SCHEMA],
-
 })
 export class AppModule {
 

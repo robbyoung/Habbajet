@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
+import { ImageState, ImageService } from "../../../../services/images.service";
 
 @Component({
     selector: "habbajet-image",
@@ -8,9 +9,17 @@ import * as _ from 'lodash';
 })
 
 export class HabbajetImageComponent {
-    public name: string;
+    public image: ImageState;
+    public intervalId: number;
     
-    constructor() {
-        
+    constructor(private imageService: ImageService) {
+        this.image = new ImageState();
+        this.intervalId = setInterval(() => {
+            imageService.nextState(this.image);
+        }, 100);
+    }
+
+    public onImageTap() {
+        this.imageService.evolve(this.image);
     }
 }
