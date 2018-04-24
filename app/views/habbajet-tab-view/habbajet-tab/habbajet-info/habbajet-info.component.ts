@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
+import { Habbajet } from "../../../../services/habbajet.service";
 
 @Component({
     selector: "habbajet-info",
@@ -8,4 +9,9 @@ import * as _ from 'lodash';
 })
 
 export class HabbajetInfoComponent {
+    @Input() habbajet: Habbajet;
+
+    constructor() {};
+
+    ngOnInit() {}
 }

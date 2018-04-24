@@ -1,7 +1,7 @@
 <StackLayout>
     <label [text]="name"></label>
-    <habbajet-image></habbajet-image>
-    <habbajet-info></habbajet-info>
+    <habbajet-image [image]="habbajet.image"></habbajet-image>
+    <habbajet-info [habbajet]="habbajet"></habbajet-info>
     <habbajet-checkbox></habbajet-checkbox>
-    <habbajet-buttons></habbajet-buttons>
+    <habbajet-buttons [habbajet]="habbajet"></habbajet-buttons>
 </StackLayout>

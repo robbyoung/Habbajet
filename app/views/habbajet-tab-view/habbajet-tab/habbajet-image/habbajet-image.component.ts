@@ -9,13 +9,14 @@ import { ImageState, ImageService } from "../../../../services/images.service";
 })
 
 export class HabbajetImageComponent {
-    public image: ImageState;
+    @Input() image: ImageState;
     public intervalId: number;
     
-    constructor(private imageService: ImageService) {
-        this.image = new ImageState();
+    constructor(private imageService: ImageService) {}
+
+    ngOnInit() {
         this.intervalId = setInterval(() => {
-            imageService.nextState(this.image);
+            this.imageService.nextState(this.image);
         }, 100);
     }
 

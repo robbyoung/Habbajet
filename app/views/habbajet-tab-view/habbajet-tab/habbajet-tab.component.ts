@@ -12,9 +12,10 @@ export class HabbajetTabComponent {
     public name: string;
     public habbajet: Habbajet;
     
-    constructor(private habbajetService: HabbajetService) {
-        console.log(this.habbajetIndex);
+    constructor(private habbajetService: HabbajetService) {}
+
+    ngOnInit() {
         this.habbajet = this.habbajetService.getHabbajet(this.habbajetIndex);
-        this.name = this.habbajetService.getHabbajetName(this.habbajetIndex);
+        this.name = this.habbajetService.getHabbajetName(this.habbajetIndex) + ' (' + this.habbajetIndex + ')';
     }
 }
