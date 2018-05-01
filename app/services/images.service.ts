@@ -7,8 +7,8 @@ export class ImageState {
     public action: string;
     public imageUrl: string;
 
-    constructor() {
-        this.state = 0;
+    constructor(state: number) {
+        this.state = state;
         this.frame = 0;
         this.action = 'i';
         this.refreshImageUrl();

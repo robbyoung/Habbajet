@@ -1,3 +1,7 @@
 <StackLayout>
     <label text="Buttons go here"></label>
+    <GridLayout rows="auto" columns="*,*">
+        <label text="GOOD" [class]="locked ? 'button' : 'lockedButton'" tap="onPositiveTap"></label>
+        <label text="BAD" [class]="locked ? 'button' : 'lockedButton'" tap="onNegativeTap"></label>
+    </GridLayout>
 </StackLayout>

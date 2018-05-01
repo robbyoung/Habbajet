@@ -2,10 +2,14 @@ import { Injectable } from "@angular/core";
 import { ImageState } from "./images.service";
 
 export class Habbajet {
-    public image: ImageState
-    
-    constructor(public name: string) {
-        this.image = new ImageState();
+    public image: ImageState;
+
+    constructor(public name: string, public state: number) {
+        this.image = new ImageState(state);
+    }
+
+    public getState() {
+        return this.image.state;
     }
 }
 
@@ -15,14 +19,14 @@ export class HabbajetService {
 
     constructor() {
         this.habbajetList = [];
-        this.habbajetList.push(new Habbajet('one'));
-        this.habbajetList.push(new Habbajet('two'));
-        this.habbajetList.push(new Habbajet('three'));
-        this.habbajetList.push(new Habbajet('four'));
-        this.habbajetList.push(new Habbajet('five'));
-        this.habbajetList.push(new Habbajet('six'));
+        this.habbajetList.push(new Habbajet('one', 0));
+        this.habbajetList.push(new Habbajet('two', 0));
+        this.habbajetList.push(new Habbajet('three', 0));
+        this.habbajetList.push(new Habbajet('four', 0));
+        this.habbajetList.push(new Habbajet('five', 0));
+        this.habbajetList.push(new Habbajet('six', 0));
     }
-    
+
     public habbajetExists(index: number): boolean {
         return this.habbajetList.length > index && this.habbajetList[index] !== undefined;
     }

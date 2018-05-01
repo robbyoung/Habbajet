@@ -12,6 +12,7 @@ import { HabbajetButtonsComponent } from "./views/habbajet-tab-view/habbajet-tab
 import { HabbajetCheckboxComponent } from "./views/habbajet-tab-view/habbajet-tab/habbajet-checkbox/habbajet-checkbox.component";
 import { ImageService } from "./services/images.service";
 import { HabbajetService } from "./services/habbajet.service";
+import { SavingService } from "./services/saving.service";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HabbajetService } from "./services/habbajet.service";
   providers: [
     HabbajetService,
     ImageService,
+    SavingService,
   ],
   bootstrap: [AppComponent],
   imports: [NativeScriptModule],
