@@ -3,10 +3,16 @@
     background-color: #111111;
     font-weight: bold;
     font-size: 30;
+    text-align: center;
+    padding: 10;
+    margin: 5;
 }
 
 .lockedButton {
     color: #a8a8a8;
     background-color: #313131;
     font-size: 30;
+    text-align: center;
+    padding: 10;
+    margin: 5;
 }

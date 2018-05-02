@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ImageState } from "./images.service";
+import { ImageState, ImageService } from "./images.service";
 
 export class Habbajet {
     public image: ImageState;
@@ -17,7 +17,7 @@ export class Habbajet {
 export class HabbajetService {
     public habbajetList: Habbajet[];
 
-    constructor() {
+    constructor(private imageService: ImageService) {
         this.habbajetList = [];
         this.habbajetList.push(new Habbajet('one', 0));
         this.habbajetList.push(new Habbajet('two', 0));
@@ -45,5 +45,13 @@ export class HabbajetService {
         } else {
             return undefined;
         }
+    }
+
+    public evolve(habbajet: Habbajet) {
+        this.imageService.evolve(habbajet.image);
+    }
+
+    public action(habbajet: Habbajet) {
+        this.imageService.action(habbajet.image);
     }
 }

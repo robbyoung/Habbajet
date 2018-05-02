@@ -1,15 +1,18 @@
 import { Injectable, state } from "@angular/core";
 import * as saveObject from 'application-settings';
-import { Habbajet } from "./habbajet.service";
+import { Habbajet, HabbajetService } from "./habbajet.service";
 import * as _ from 'lodash';
 
 @Injectable()
 export class SavingService {
-    constructor() {}
+    constructor(private habbajetService: HabbajetService) {}
 
-    public saveHabbajetList(habbajetList: Habbajet[]) {
+    public saveHabbajetList() {
+        const habbajetList = this.habbajetService.habbajetList;
         _.each(habbajetList, (habbajet, index) => {
-            this.saveHabbajet(habbajet, index);
+            if(habbajet !== undefined) {
+                this.saveHabbajet(habbajet, index);
+            }
         });
     }
 

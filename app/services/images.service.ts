@@ -21,8 +21,11 @@ export class ImageState {
 
 @Injectable()
 export class ImageService {
-    
-    constructor() {}
+    private numActionTypes;
+
+    constructor() {
+        this.numActionTypes = 2;
+    }
 
     public nextState(imageState: ImageState) {
         imageState.frame++;
@@ -39,9 +42,22 @@ export class ImageService {
     public evolve(imageState: ImageState) {
         if(imageState.action !== 't') {
             imageState.action = 't';
-            imageState.frame = 0;
+            imageState.frame = -1;
             imageState.state = (imageState.state + 1) % 7;
-            imageState.refreshImageUrl();
+        }
+    }
+
+    public action(imageState: ImageState) {
+        let randActionNum = Math.round(Math.random() * this.numActionTypes);
+        let action = 'a';
+        switch(randActionNum) {
+            case 0: action = 'a'; break;
+            case 1: action = 'b'; break;
+        }
+
+        if(frameCounts(action + imageState.state) > 0 && imageState.action !== 't') {
+            imageState.action = action;
+            imageState.frame = -1;
         }
     }
 }
