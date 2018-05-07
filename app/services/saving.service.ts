@@ -19,6 +19,7 @@ export class SavingService {
     public saveHabbajet(habbajet: Habbajet, index: number) {
         saveObject.setString(`hName${index}`, habbajet.name);
         saveObject.setNumber(`hState${index}`, habbajet.getState());
+        saveObject.setString(`hColor${index}`, habbajet.getColor())
     }
 
     public loadHabbajetList(): Habbajet[] {
@@ -34,10 +35,13 @@ export class SavingService {
     }
 
     public loadHabbajet(index: number): Habbajet {
-        if(saveObject.hasKey(`hName${index}`) && saveObject.hasKey(`hName${index}`)) {
+        if(saveObject.hasKey(`hName${index}`) &&
+                saveObject.hasKey(`hState${index}`) &&
+                saveObject.hasKey(`hColor${index}`)) {
             const habbajet = new Habbajet(
                 saveObject.getString(`hName${index}`),
-                saveObject.getNumber(`hName${index}`),
+                saveObject.getNumber(`hState${index}`),
+                saveObject.getString(`hColor${index}`)
             );
         } else {
             return undefined;

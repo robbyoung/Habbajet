@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { frameCounts } from '../frame-counts';
 
 export class ImageState {
-    public state: number;
     public frame: number;
     public action: string;
     public imageUrl: string;
 
-    constructor(state: number) {
+    constructor(public state: number, public color: string) {
         this.state = state;
         this.frame = 0;
         this.action = 'i';
@@ -15,7 +14,7 @@ export class ImageState {
     }
     
     public refreshImageUrl() {
-        this.imageUrl = '~/images/habbajets/' + this.action + this.state + '-' + this.frame + '.png';
+        this.imageUrl = '~/images/habbajets/' + this.color + '/' + this.action + this.state + '-' + this.frame + '.png';
     }
 }
 

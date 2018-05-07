@@ -11,7 +11,8 @@ import { ImageService } from "./services/images.service";
 export class AppComponent {
 
   constructor(private habbajetService: HabbajetService, private imageService: ImageService) {
-    habbajetService = new HabbajetService();
     imageService = new ImageService();
+    habbajetService = new HabbajetService(imageService);
+    
   }
 }
