@@ -29,7 +29,7 @@ import { SavingService } from "./services/saving.service";
   providers: [
     HabbajetService,
     ImageService,
-    SavingService,
+    // SavingService,
   ],
   bootstrap: [AppComponent],
   imports: [NativeScriptModule],

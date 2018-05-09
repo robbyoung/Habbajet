@@ -18,8 +18,8 @@ export class SavingService {
 
     public saveHabbajet(habbajet: Habbajet, index: number) {
         saveObject.setString(`hName${index}`, habbajet.name);
-        saveObject.setNumber(`hState${index}`, habbajet.getState());
-        saveObject.setString(`hColor${index}`, habbajet.getColor())
+        saveObject.setNumber(`hState${index}`, habbajet.state);
+        saveObject.setString(`hColor${index}`, habbajet.color)
     }
 
     public loadHabbajetList(): Habbajet[] {

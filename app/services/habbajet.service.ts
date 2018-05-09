@@ -1,19 +1,19 @@
 import { Injectable } from "@angular/core";
 import { ImageState, ImageService } from "./images.service";
 
+export interface HabbajetInfo  {
+    streak: number;
+}
+
 export class Habbajet {
     public image: ImageState;
+    public info: HabbajetInfo;
 
     constructor(public name: string, public state: number, public color: string) {
         this.image = new ImageState(state, color);
-    }
-
-    public getState() {
-        return this.image.state;
-    }
-
-    public getColor() {
-        return this.image.color;
+        this.info = {
+            streak: 0,
+        }
     }
 }
 
@@ -43,19 +43,32 @@ export class HabbajetService {
         }
     }
 
-    public getHabbajet(index: number): Habbajet {
+    public getHabbajetImage(index: number): ImageState {
         if (this.habbajetExists(index)) {
-            return this.habbajetList[index];
+            return this.habbajetList[index].image;
         } else {
             return undefined;
         }
     }
 
-    public evolve(habbajet: Habbajet) {
-        this.imageService.evolve(habbajet.image);
+    public getHabbajetInfo(index: number): HabbajetInfo {
+        if (this.habbajetExists(index)) {
+            return this.habbajetList[index].info;
+        } else {
+            return undefined;
+        }
     }
 
-    public action(habbajet: Habbajet) {
-        this.imageService.action(habbajet.image);
+    public evolve(habbajetIndex: number) {
+        if(this.habbajetExists(habbajetIndex)) {
+            this.imageService.evolve(this.habbajetList[habbajetIndex].image);
+        }
+        
+    }
+
+    public action(habbajetIndex: number) {
+        if(this.habbajetExists(habbajetIndex)) {
+            this.imageService.action(this.habbajetList[habbajetIndex].image);
+        }
     }
 }

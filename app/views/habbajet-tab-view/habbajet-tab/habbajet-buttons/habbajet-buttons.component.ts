@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
-import { Habbajet, HabbajetService } from "../../../../services/habbajet.service";
+import { HabbajetService } from "../../../../services/habbajet.service";
 
 
 @Component({
@@ -10,7 +10,7 @@ import { Habbajet, HabbajetService } from "../../../../services/habbajet.service
 })
 
 export class HabbajetButtonsComponent {
-    @Input() habbajet: Habbajet;
+    @Input() habbajetIndex: number;
     public locked: boolean;
 
     constructor(private habbajetService: HabbajetService) {}
@@ -21,9 +21,9 @@ export class HabbajetButtonsComponent {
 
     onPositiveTap() {
         if(!this.locked) {
-            this.habbajetService.evolve(this.habbajet);
+            this.habbajetService.evolve(this.habbajetIndex);
         }
-        // this.locked = true;
+        this.locked = true;
     }
 
     onNegativeTap() {

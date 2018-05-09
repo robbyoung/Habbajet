@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
 import { ImageState, ImageService } from "../../../../services/images.service";
-import { Habbajet, HabbajetService } from "../../../../services/habbajet.service";
+import { HabbajetService } from "../../../../services/habbajet.service";
 
 @Component({
     selector: "habbajet-image",
@@ -10,21 +10,20 @@ import { Habbajet, HabbajetService } from "../../../../services/habbajet.service
 })
 
 export class HabbajetImageComponent {
-    @Input() habbajet: Habbajet;
+    @Input() habbajetIndex: number;
     public intervalId: number;
     public image: ImageState;
     
-    constructor(private habbajetService: HabbajetService, private imageService: ImageService) {
-        this.image = this.habbajet.image;
-    }
+    constructor(private habbajetService: HabbajetService, private imageService: ImageService) {}
 
     ngOnInit() {
+        this.image = this.habbajetService.getHabbajetImage(this.habbajetIndex);
         this.intervalId = setInterval(() => {
             this.imageService.nextState(this.image);
         }, 100);
     }
 
     public onImageTap() {
-        this.imageService.evolve(this.image);
+        this.habbajetService.action(this.habbajetIndex);
     }
 }

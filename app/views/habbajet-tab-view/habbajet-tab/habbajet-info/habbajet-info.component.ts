@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
-import { Habbajet } from "../../../../services/habbajet.service";
+import { HabbajetInfo, HabbajetService } from "../../../../services/habbajet.service";
 
 @Component({
     selector: "habbajet-info",
@@ -9,9 +9,12 @@ import { Habbajet } from "../../../../services/habbajet.service";
 })
 
 export class HabbajetInfoComponent {
-    @Input() habbajet: Habbajet;
+    @Input() habbajetIndex: number;
+    public info: HabbajetInfo;
 
-    constructor() {};
+    constructor(private habbajetService: HabbajetService) {};
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.info = this.habbajetService.getHabbajetInfo(this.habbajetIndex);
+    }
 }

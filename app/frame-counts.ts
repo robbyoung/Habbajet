@@ -6,7 +6,7 @@ export function frameCounts(state: string): number {
     case 'a3': return 6;
     case 'a4': return 9;
     case 'a5': return 11;
-    case 'b0': return 6;
+    case 'b0': return 18;
     case 'b1': return 11;
     case 'b2': return 6;
     case 'b3': return 9;

@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import * as _ from 'lodash';
-import { Habbajet, HabbajetService } from "../../../services/habbajet.service";
+import { HabbajetService } from "../../../services/habbajet.service";
 
 @Component({
     selector: "habbajet-tab",
@@ -10,12 +10,10 @@ import { Habbajet, HabbajetService } from "../../../services/habbajet.service";
 export class HabbajetTabComponent {
     @Input() habbajetIndex: number;
     public name: string;
-    public habbajet: Habbajet;
     
     constructor(private habbajetService: HabbajetService) {}
 
     ngOnInit() {
-        this.habbajet = this.habbajetService.getHabbajet(this.habbajetIndex);
         this.name = this.habbajetService.getHabbajetName(this.habbajetIndex) + ' (' + this.habbajetIndex + ')';
     }
 }
